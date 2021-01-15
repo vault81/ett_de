@@ -5,5 +5,9 @@ $LOAD_PATH << './lib'
 
 require 'refresh_players'
 
-puts "Starting worker"
-RefreshPlayers.run
+puts 'Starting worker'
+if ENV['REFRESH_STATUS']=='1234'
+  RefreshPlayers.run_status
+else
+  RefreshPlayers.run
+end

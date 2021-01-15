@@ -2,6 +2,21 @@ require 'ett_api'
 
 class RefreshPlayers
   class << self
+    def run_status
+      loop do
+        puts 'Refreshing all player statuses....'
+        repo.all.map do |player|
+          puts player
+
+          attrs = { ett_status: build_status_for_player(player.ett_id, status) }
+          puts attrs
+
+          repo.update(player.id, attrs)
+        end
+        sleep 5
+      end
+    end
+
     def run
       loop do
         puts 'Refreshing all players....'
@@ -27,8 +42,12 @@ class RefreshPlayers
     end
 
     def build_status_for_player(id, status)
-      return 'offline' unless status[:OnlineUses].any? { |el| el[:Id] == id.to_s }
-      return 'free' unless status[:UsersInRooms].any? { |el| el[:Id] == id.to_s }
+      unless status[:OnlineUses].any? { |el| el[:Id] == id.to_s }
+        return 'offline'
+      end
+      unless status[:UsersInRooms].any? { |el| el[:Id] == id.to_s }
+        return 'free'
+      end
 
       'inroom'
     end
