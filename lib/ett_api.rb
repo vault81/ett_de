@@ -8,6 +8,8 @@ class EttAPI
           "https://www.elevenvr.club/accounts/#{id_or_name}"
         ) { |conn| conn.headers['Content-Type'] = 'application/json' }
 
+      raise StandardError unless resp.status == 200
+
       data = Oj.load(resp.body, symbol_keys: true)[:data]
       attrs = data[:attributes].merge(ett_id: data[:id])
 
