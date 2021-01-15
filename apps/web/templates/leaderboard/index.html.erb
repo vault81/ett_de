@@ -12,6 +12,7 @@
         <th scope="col"> Wins</th>
         <th scope="col"> Losses</th>
         <th scope="col"> Status </th>
+        <th scope="col"> Online vor </th>
       </tr>
     <% players.each.with_index do |player, i| %>
       <tr class="player">
@@ -21,6 +22,7 @@
         <th><%= player.ett_wins %> </th>
         <th><%= player.ett_losses %> </th>
         <th><%= player.ett_status %> </th>
+        <th><%= player.ett_last_online.nil? ? 'x' : format_time((Time.now - player.ett_last_online).to_i) %> s </th>
       </tr>
     <% end %>
     </table>

@@ -71,6 +71,7 @@ class EttAPI
       attrs = data[:attributes].merge(ett_id: data[:id])
 
       {
+        ett_last_online: Time.parse(attrs[:"last-online"]),
         ett_id: attrs[:ett_id],
         ett_name: attrs[:"user-name"],
         ett_wins: attrs[:wins],
