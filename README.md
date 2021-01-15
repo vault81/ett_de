@@ -1,8 +1,13 @@
-# Ett De
+# Ett De Dashboard
 
-Welcome to your new Hanami project!
+Leaderboard for the German ElevenTableTennis Community
 
-## Setup
+
+## More INFO will follow...
+
+## Development
+
+### Setup
 
 How to run tests:
 
