@@ -28,7 +28,6 @@ RUN apt-get install -y --no-install-recommends libsqlite3-dev build-essential li
 
 COPY . /code
 RUN chown -R app:app /code/
-RUN chmod +x ./bin/refresh_players
 
 USER app
 

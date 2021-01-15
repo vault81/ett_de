@@ -18,7 +18,7 @@ elif [ "$1" = "worker" ]; then
   createdb --host=ett-de-db -w ett_de_production --user=postgres
   bundle exec hanami db migrate
 
-  bundle exec ruby ./bin/refresh_players
+  bundle exec ruby ./bin/worker $2
 elif [ "$1" = "run" ]; then
   createdb --host=ett-de-db -w ett_de_production --user=postgres
   bundle exec hanami db migrate

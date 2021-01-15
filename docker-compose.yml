@@ -6,40 +6,53 @@ networks:
 
 services:
   app:
-    # image: "${IMAGE:-ett-de:dev}"
+    image: ett-de:dev
     build: .
-    ports:
-      - 8080:8080
     environment:
       - VIRTUAL_HOST=ett.vlt81.de
-      - LETSENCRYPT=ett.vlt81.de
-      - POSTGRES_URL=postgres://postgres:postgres@postgres:5432/ett_de_production
+      - LETSENCRYPT_HOST=ett.vlt81.de
+      - POSTGRES_URL=postgres://postgres:changeme123@postgres:5432/ett_de_production
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
       - REDIS_URL=redis://redis:6379
       - ENV=production
       - HANAMI_ENV=production
-      - PGPASSWORD=postgres
+      - PGPASSWORD=changeme123
     networks:
       - local
       - proxy-tier
+
   worker:
-    # image: "${IMAGE:-ett-de:dev}"
+    image: ett-de:dev
     build: .
-    command: 'worker'
+    command: 'worker ett_api'
     environment:
-      - POSTGRES_URL=postgres://postgres:postgres@postgres:5432/ett_de_production
+      - POSTGRES_URL=postgres://postgres:changeme123@postgres:5432/ett_de_production
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
       - REDIS_URL=redis://redis:6379
       - ENV=development
       - HANAMI_ENV=development
-      - PGPASSWORD=postgres
+      - PGPASSWORD=changeme123
+    networks:
+      - local
+
+  worker_2:
+    image: ett-de:dev
+    build: .
+    command: 'worker log_collector_api'
+    environment:
+      - POSTGRES_URL=postgres://postgres:changeme123@postgres:5432/ett_de_production
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+      - REDIS_URL=redis://redis:6379
+      - ENV=development
+      - HANAMI_ENV=development
+      - PGPASSWORD=changeme123
     networks:
       - local
 
   postgres:
     image: postgres
     environment:
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=changeme123
     networks:
       - local
   redis:

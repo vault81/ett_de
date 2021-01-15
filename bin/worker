@@ -6,8 +6,12 @@ $LOAD_PATH << './lib'
 require 'refresh_players'
 
 puts 'Starting worker'
-if ENV['REFRESH_STATUS']=='1234'
+
+case $ARGV[0]
+when 'ett_api'
+  RefreshPlayers.run
+when 'log_collector_api'
   RefreshPlayers.run_status
 else
-  RefreshPlayers.run
+  puts "No worker called #{$ARGV[0]} found"
 end
