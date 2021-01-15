@@ -3,6 +3,7 @@ require 'hanami/setup'
 require 'hanami/model'
 require_relative '../lib/ett_de'
 require_relative '../apps/web/application'
+require_relative './sidekiq'
 
 Hanami.configure do
   mount Web::Application, at: '/'
