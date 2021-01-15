@@ -4,6 +4,7 @@ class RefreshPlayers
   class << self
     def run_status
       loop do
+        status = LogCollectorAPI.fetch_status
         puts 'Refreshing all player statuses....'
         repo.all.map do |player|
           puts player
@@ -13,7 +14,8 @@ class RefreshPlayers
 
           repo.update(player.id, attrs)
         end
-        sleep 5
+        puts 'Sleeping 15 secs'
+        sleep 15
       end
     end
 
