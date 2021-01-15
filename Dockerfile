@@ -32,5 +32,6 @@ RUN chmod +x ./bin/refresh_players
 
 USER app
 
+EXPOSE 8080/tcp
 ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["run"]
