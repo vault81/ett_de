@@ -284,17 +284,18 @@ module Web
       # scheme 'https'
       # host   'example.org'
       # port   443
+      # handle_exceptions false
 
       assets do
         # Don't compile static assets in production mode (eg. Sass, ES6)
         #
         # See: http://www.rubydoc.info/gems/hanami-assets#Configuration
-        compile false
+        # compile false
 
         # Use fingerprint file name for asset paths
         #
         # See: https://guides.hanamirb.org/assets/overview
-        fingerprint true
+        # fingerprint true
 
         # Content Delivery Network (CDN)
         #
@@ -307,7 +308,7 @@ module Web
         # Subresource Integrity
         #
         # See: https://guides.hanamirb.org/assets/content-delivery-network/#subresource-integrity
-        subresource_integrity :sha256
+        # subresource_integrity :sha256
       end
     end
   end
