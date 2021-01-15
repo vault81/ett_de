@@ -6,7 +6,6 @@ REDIS_TCP=$(echo $REDIS_URL | sed -E "s/rediss?:\/\/(.*@)?/tcp:\/\//")
 export DATABASE_URL=$POSTGRES_URL
 
 dockerize -wait $POSTGRES_TCP \
-          -wait $RABBITMQ_TCP \
           -wait $REDIS_TCP \
           -timeout 20s
 
