@@ -26,7 +26,7 @@ RSpec.describe Web::Views::Leaderboard::Index, type: :view do
     it 'lists them all' do
       expect(rendered.scan(/class="player"/).length).to eq(1)
       expect(rendered).to include('1700')
-      expect(rendered).to include('20 Wins')
+      expect(rendered).to include('20')
     end
   end
 end

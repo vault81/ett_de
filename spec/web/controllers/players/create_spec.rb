@@ -16,6 +16,6 @@ RSpec.describe Web::Controllers::Players::Create, type: :action do
     response = action.call(params)
 
     expect(response[0]).to eq(302)
-    expect(response[1]['Location']).to eq('/players')
+    expect(response[1]['Location']).to eq('/leaderboard')
   end
 end

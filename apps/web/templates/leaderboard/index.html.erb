@@ -5,7 +5,7 @@
   <div id="players">
     <table class="table table-hover table-striped">
 
-      <tr class="player">
+      <tr class="header">
         <th scope="col"> Rank</th>
         <th scope="col"> Nickname</th>
         <th scope="col"> Elo </th>
@@ -15,7 +15,7 @@
     <% players.each.with_index do |player, i| %>
       <tr class="player">
         <th scope="row">#<%= i+1 %></th>
-        <th ><%= player.ett_name %></th>
+        <th><%= player.ett_name %></th>
         <th><%= player.ett_elo %> </th>
         <th><%= player.ett_wins %> </th>
         <th><%= player.ett_losses %> </th>
