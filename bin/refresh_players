@@ -1,0 +1,8 @@
+#!/bin/env ruby
+require './config/boot'
+
+$LOAD_PATH << './lib'
+
+require 'refresh_players'
+
+RefreshPlayers.run
