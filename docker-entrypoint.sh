@@ -11,16 +11,17 @@ dockerize -wait $POSTGRES_TCP \
 
 if [ "$1" = "test" ]; then
   export ENV='test'
+  createdb --host=postgres -w ett_de_production --user=postgres
   set -e
-  bundle exec hanami db prepare
+  bundle exec hanami db migrate
   exec bundle exec rake
 elif [ "$1" = "worker" ]; then
-  createdb --host=ett-de-db -w ett_de_production --user=postgres
+  createdb --host=postgres -w ett_de_production --user=postgres
   bundle exec hanami db migrate
 
   bundle exec ruby ./bin/worker $2
 elif [ "$1" = "run" ]; then
-  createdb --host=ett-de-db -w ett_de_production --user=postgres
+  createdb --host=postgres -w ett_de_production --user=postgres
   bundle exec hanami db migrate
   set -e
 

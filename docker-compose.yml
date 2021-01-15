@@ -12,7 +12,6 @@ services:
       - VIRTUAL_HOST=ett.vlt81.de
       - LETSENCRYPT_HOST=ett.vlt81.de
       - POSTGRES_URL=postgres://postgres:changeme123@postgres:5432/ett_de_production
-      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
       - REDIS_URL=redis://redis:6379
       - ENV=production
       - HANAMI_ENV=production
@@ -27,7 +26,6 @@ services:
     command: 'worker ett_api'
     environment:
       - POSTGRES_URL=postgres://postgres:changeme123@postgres:5432/ett_de_production
-      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
       - REDIS_URL=redis://redis:6379
       - ENV=development
       - HANAMI_ENV=development
@@ -41,7 +39,6 @@ services:
     command: 'worker log_collector_api'
     environment:
       - POSTGRES_URL=postgres://postgres:changeme123@postgres:5432/ett_de_production
-      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
       - REDIS_URL=redis://redis:6379
       - ENV=development
       - HANAMI_ENV=development
