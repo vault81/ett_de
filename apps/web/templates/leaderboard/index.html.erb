@@ -11,6 +11,7 @@
         <th scope="col"> Elo </th>
         <th scope="col"> Wins</th>
         <th scope="col"> Losses</th>
+        <th scope="col"> Status </th>
       </tr>
     <% players.each.with_index do |player, i| %>
       <tr class="player">
@@ -19,6 +20,7 @@
         <th><%= player.ett_elo %> </th>
         <th><%= player.ett_wins %> </th>
         <th><%= player.ett_losses %> </th>
+        <th><%= player.ett_status %> </th>
       </tr>
     <% end %>
     </table>

@@ -1,6 +1,7 @@
 class Player < Hanami::Entity
   attributes do
     attribute :id, Types::Int
+    attribute :ett_status, Types::String
     attribute :ett_id, Types::Int
     attribute :ett_name, Types::String
     attribute :ett_elo, Types::Int
