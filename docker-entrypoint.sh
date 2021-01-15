@@ -16,12 +16,12 @@ if [ "$1" = "test" ]; then
   bundle exec hanami db prepare
   exec bundle exec rake
 elif [ "$1" = "worker" ]; then
-  createdb --host=postgres -w ett_de_production --user=postgres
+  createdb --host=ett-de-db -w ett_de_production --user=postgres
   bundle exec hanami db migrate
 
   bundle exec ruby ./bin/refresh_players
 elif [ "$1" = "run" ]; then
-  createdb --host=postgres -w ett_de_production --user=postgres
+  createdb --host=ett-de-db -w ett_de_production --user=postgres
   bundle exec hanami db migrate
   set -e
 
