@@ -1,4 +1,4 @@
-require 'faraday'
+require 'ett_api'
 
 module Web
   module Controllers
@@ -14,25 +14,7 @@ module Web
         end
 
         def get_player_data(ett_id)
-          attrs = fetch_from_ett_api(ett_id)
-
-          {
-            ett_id: attrs[:ett_id],
-            ett_name: attrs[:"user-name"],
-            ett_wins: attrs[:wins],
-            ett_losses: attrs[:losses],
-            ett_rank: attrs[:rank],
-            ett_elo: attrs[:elo]
-          }
-        end
-
-        def fetch_from_ett_api(ett_id)
-          resp =
-            Faraday.get(
-              "https://www.elevenvr.club/accounts/#{ett_id}"
-            ) { |conn| conn.headers['Content-Type'] = 'application/json' }
-          data = Oj.load(resp.body, symbol_keys: true)[:data]
-          data[:attributes].merge(ett_id: data[:id])
+          EttAPI.fetch_player(ett_id)
         end
       end
     end

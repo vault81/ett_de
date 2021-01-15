@@ -1,6 +1,10 @@
 require 'hanami/helpers'
 require 'hanami/assets'
 require 'warning'
+
+$LOAD_PATH << './lib'
+require 'workers/hard_worker'
+
 Gem.path.each { |path| Warning.ignore(//, path) }
 
 module Web
@@ -141,7 +145,7 @@ module Web
 
         # Specify sources for assets
         #
-        sources << %w[assets]
+        sources << ['assets']
       end
 
       ##
