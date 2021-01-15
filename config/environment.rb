@@ -1,9 +1,13 @@
 require 'bundler/setup'
+
 require 'hanami/setup'
 require 'hanami/model'
+
 require_relative '../lib/ett_de'
 require_relative '../apps/web/application'
 require_relative './sidekiq'
+require 'pg'
+require 'pry'
 
 Hanami.configure do
   mount Web::Application, at: '/'
@@ -21,11 +25,13 @@ Hanami.configure do
     #
     adapter :sql, ENV.fetch('DATABASE_URL')
 
+    gateway { |g| g.connection.extension(:pg_json) }
+
     ##
     # Migrations
     #
     migrations 'db/migrations'
-    schema     'db/schema.sql'
+    schema 'db/schema.sql'
   end
 
   mailer do

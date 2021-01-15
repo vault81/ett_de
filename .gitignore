@@ -4,3 +4,4 @@
 /bundle
 .env.local
 .env.*.local
+docker-compose.override.yml

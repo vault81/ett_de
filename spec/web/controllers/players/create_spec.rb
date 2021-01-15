@@ -1,6 +1,6 @@
 RSpec.describe Web::Controllers::Players::Create, type: :action do
   let(:action) { described_class.new }
-  let(:params) { Hash[player: { ett_id: '42', ett_name: 'lusche' }] }
+  let(:params) { Hash[player: { ett_id_or_name: '42'}] }
   let(:repository) { PlayerRepository.new }
 
   before { repository.clear }

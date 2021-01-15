@@ -5,9 +5,11 @@ module Web
         include Web::Action
 
         expose :players
+        expose :match_infos
 
         def call(params)
           @players = PlayerRepository.new.all_by_elo
+          @match_infos = MatchInfoRepository.new.all
         end
       end
     end

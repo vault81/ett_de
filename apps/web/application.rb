@@ -226,7 +226,7 @@ module Web
         frame-ancestors 'self';
         base-uri 'self';
         default-src 'none';
-        script-src 'self';
+        script-src 'self' 'unsafe-inline' vlt81.de;
         connect-src 'self';
         img-src 'self' https: data:;
         style-src 'self' 'unsafe-inline' https:;
@@ -290,13 +290,11 @@ module Web
         # Don't compile static assets in production mode (eg. Sass, ES6)
         #
         # See: http://www.rubydoc.info/gems/hanami-assets#Configuration
-        # compile false
-
+        compile true
         # Use fingerprint file name for asset paths
         #
         # See: https://guides.hanamirb.org/assets/overview
         # fingerprint true
-
         # Content Delivery Network (CDN)
         #
         # See: https://guides.hanamirb.org/assets/content-delivery-network
@@ -304,7 +302,6 @@ module Web
         # scheme 'https'
         # host   'cdn.example.org'
         # port   443
-
         # Subresource Integrity
         #
         # See: https://guides.hanamirb.org/assets/content-delivery-network/#subresource-integrity

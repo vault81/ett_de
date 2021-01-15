@@ -1,9 +1,0 @@
-#!/bin/env ruby
-require './config/boot'
-
-$LOAD_PATH << './lib'
-
-require 'refresh_players'
-
-puts "Starting worker"
-RefreshPlayers.run
