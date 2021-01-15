@@ -7,7 +7,7 @@ module Web
         expose :players
 
         def call(params)
-          @players = PlayerRepository.new.all.sort_by(&:ett_elo).reverse
+          @players = PlayerRepository.new.all_by_elo
         end
       end
     end
