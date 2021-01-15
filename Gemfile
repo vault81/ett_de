@@ -6,8 +6,7 @@ gem 'hanami-model', '~> 1.3'
 gem 'warning'
 gem 'faraday'
 gem 'oj'
-
-gem 'sqlite3'
+gem 'sidekiq'
 
 group :development do
   # Code reloading
@@ -17,6 +16,8 @@ group :development do
 end
 
 group :test, :development do
+  gem 'sqlite3'
+  gem 'pry'
   gem 'dotenv', '~> 2.4'
 end
 
@@ -26,5 +27,6 @@ group :test do
 end
 
 group :production do
-  # gem 'puma'
+  gem 'puma'
+  gem 'pg'
 end
