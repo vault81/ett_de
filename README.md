@@ -2,6 +2,8 @@
 
 Leaderboard for the German ElevenTableTennis Community
 
+Beta: https://ett.vlt81.de/leaderboard
+
 
 #### More INFO will follow...
 
