@@ -3,6 +3,8 @@ services:
   app:
     # image: "${IMAGE:-ett-de:dev}"
     build: .
+    ports:
+      - 8080:8080
     environment:
       - POSTGRES_URL=postgres://postgres:postgres@postgres:5432/cloud_importer_test
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672

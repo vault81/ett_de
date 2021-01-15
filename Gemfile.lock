@@ -1,3 +1,17 @@
+GIT
+  remote: https://github.com/hanami/model.git
+  revision: 1fb18741c3c36a2db8d4269a385b99b7e9b16cf3
+  specs:
+    hanami-model (1.3.2)
+      bigdecimal (~> 1.4)
+      concurrent-ruby (~> 1.0)
+      dry-logic (~> 0.4.2, < 0.5)
+      dry-types (~> 0.11.0)
+      hanami-utils (~> 1.3)
+      rom (~> 3.3, >= 3.3.3)
+      rom-repository (~> 1.4)
+      rom-sql (~> 1.3, >= 1.3.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -7,6 +21,7 @@ GEM
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
+    bigdecimal (1.4.4)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     capybara (3.34.0)
@@ -90,14 +105,6 @@ GEM
       hanami-utils (~> 1.3)
       mail (~> 2.6)
       tilt (~> 2.0, >= 2.0.1)
-    hanami-model (1.3.2)
-      concurrent-ruby (~> 1.0)
-      dry-logic (~> 0.4.2, < 0.5)
-      dry-types (~> 0.11.0)
-      hanami-utils (~> 1.3)
-      rom (~> 3.3, >= 3.3.3)
-      rom-repository (~> 1.4)
-      rom-sql (~> 1.3, >= 1.3.5)
     hanami-router (1.3.2)
       hanami-utils (~> 1.3)
       http_router (= 0.11.2)
@@ -205,7 +212,7 @@ DEPENDENCIES
   dotenv (~> 2.4)
   faraday
   hanami (~> 1.3)
-  hanami-model (~> 1.3)
+  hanami-model!
   hanami-webconsole
   oj
   pg

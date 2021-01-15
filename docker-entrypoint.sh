@@ -3,7 +3,7 @@ RABBITMQ_TCP=$(echo $RABBITMQ_URL | sed -E "s/amqp:\/\/.+@/tcp:\/\//")
 POSTGRES_TCP=$(echo $POSTGRES_URL | sed -E "s/postgres:\/\/.+@/tcp:\/\//")
 REDIS_TCP=$(echo $REDIS_URL | sed -E "s/rediss?:\/\/(.*@)?/tcp:\/\//")
 
-DATABASE_URL=$POSTGRES_URL
+export DATABASE_URL=$POSTGRES_URL
 
 dockerize -wait $POSTGRES_TCP \
           -wait $RABBITMQ_TCP \
@@ -16,16 +16,21 @@ if [ "$1" = "test" ]; then
   bundle exec hanami db prepare
   exec bundle exec rake
 elif [ "$1" = "worker" ]; then
-  export ENV='production'
-  bundle exec hanami db prepare
+  export ENV='development'
+  export HANAMI_ENV='development'
+  PGPASSWORD=postgres createdb --host=postgres -w cloud-importer-test --user=postgres
+  PGPASSWORD=postgres bundle exec hanami db migrate
 
-  bundle exec ./bin/refresh_players
+  set -e
+  bundle exec ruby ./bin/refresh_players
 elif [ "$1" = "run" ]; then
-  export ENV='production'
-  bundle exec hanami db prepare
+  export ENV='development'
+  export HANAMI_ENV='development'
+  PGPASSWORD=postgres createdb --host=postgres -w cloud-importer-test --user=postgres
+  PGPASSWORD=postgres bundle exec hanami db migrate
   set -e
 
-  exec bundle exec ./bin/cloud-importer
+  exec bundle exec puma -p 8080
 else
   exec "$@"
 fi
