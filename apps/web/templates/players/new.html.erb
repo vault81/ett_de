@@ -1,0 +1,16 @@
+
+<div class="form-floating mb-3">
+  <h2>Add Player</h2>
+<%=
+  form_for :player, '/players' do
+    div class: 'input form-control' do
+      label      :ett_id
+      text_field :ett_id
+    end
+
+    div class: 'controls' do
+      submit 'Create Player', class: 'btn btn-primary'
+    end
+  end
+%>
+</div>

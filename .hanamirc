@@ -1,0 +1,3 @@
+project=ett_de
+test=rspec
+template=erb

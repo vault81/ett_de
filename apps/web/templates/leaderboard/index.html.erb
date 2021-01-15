@@ -1,0 +1,30 @@
+<div class="container">
+<h1 class="h-1">Deutsche ETT Rangliste</h1>
+
+<% if players.any? %>
+  <div id="players">
+    <table class="table table-hover table-striped">
+
+      <tr class="player">
+        <th scope="col"> Rank</th>
+        <th scope="col"> Nickname</th>
+        <th scope="col"> Elo </th>
+        <th scope="col"> Wins</th>
+        <th scope="col"> Losses</th>
+      </tr>
+    <% players.each.with_index do |player, i| %>
+      <tr class="player">
+        <th scope="row">#<%= i+1 %></th>
+        <th ><%= player.ett_name %></th>
+        <th><%= player.ett_elo %> </th>
+        <th><%= player.ett_wins %> </th>
+        <th><%= player.ett_losses %> </th>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+<% else %>
+  <p class="placeholder">There are no players yet.</p>
+<% end %>
+<a href="/players/new">New player</a>
+</div>
