@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rake'
 gem 'hanami', '~> 1.3'
-gem 'hanami-model', '~> 1.3'
+# gem 'hanami-model', '~> 1.3'
+gem "hanami-model", git: "https://github.com/hanami/model.git", require: false
 gem 'warning'
 gem 'faraday'
 gem 'oj'

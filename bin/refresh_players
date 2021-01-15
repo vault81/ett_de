@@ -5,4 +5,5 @@ $LOAD_PATH << './lib'
 
 require 'refresh_players'
 
+puts "Starting worker"
 RefreshPlayers.run
