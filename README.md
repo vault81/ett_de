@@ -3,7 +3,7 @@
 Leaderboard for the German ElevenTableTennis Community
 
 
-## More INFO will follow...
+#### More INFO will follow...
 
 ## Development
 
