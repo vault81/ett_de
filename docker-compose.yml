@@ -6,11 +6,12 @@ services:
     ports:
       - 8080:8080
     environment:
-      - POSTGRES_URL=postgres://postgres:postgres@postgres:5432/cloud_importer_test
+      - POSTGRES_URL=postgres://postgres:postgres@postgres:5432/ett_de_production
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
       - REDIS_URL=redis://redis:6379
-      - ENV=development
-      - HANAMI_ENV=development
+      - ENV=production
+      - HANAMI_ENV=production
+      - PGPASSWORD=postgres
     links:
       - postgres
       - rabbitmq
@@ -20,11 +21,12 @@ services:
     build: .
     command: 'worker'
     environment:
-      - POSTGRES_URL=postgres://postgres:postgres@postgres:5432/cloud_importer_test
+      - POSTGRES_URL=postgres://postgres:postgres@postgres:5432/ett_de_production
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
       - REDIS_URL=redis://redis:6379
       - ENV=development
       - HANAMI_ENV=development
+      - PGPASSWORD=postgres
     links:
       - postgres
       - rabbitmq
@@ -34,7 +36,5 @@ services:
     image: postgres
     environment:
       - POSTGRES_PASSWORD=postgres
-  rabbitmq:
-    image: rabbitmq
   redis:
     image: redis

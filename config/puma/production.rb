@@ -21,5 +21,3 @@ directory File.expand_path('.')
 # block.
 #
 preload_app!
-
-before_fork { Sequel::DATABASES.each(&:disconnect) }

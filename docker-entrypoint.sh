@@ -16,18 +16,13 @@ if [ "$1" = "test" ]; then
   bundle exec hanami db prepare
   exec bundle exec rake
 elif [ "$1" = "worker" ]; then
-  export ENV='development'
-  export HANAMI_ENV='development'
-  PGPASSWORD=postgres createdb --host=postgres -w cloud-importer-test --user=postgres
-  PGPASSWORD=postgres bundle exec hanami db migrate
+  createdb --host=postgres -w ett_de_production --user=postgres
+  bundle exec hanami db migrate
 
-  set -e
   bundle exec ruby ./bin/refresh_players
 elif [ "$1" = "run" ]; then
-  export ENV='development'
-  export HANAMI_ENV='development'
-  PGPASSWORD=postgres createdb --host=postgres -w cloud-importer-test --user=postgres
-  PGPASSWORD=postgres bundle exec hanami db migrate
+  createdb --host=postgres -w ett_de_production --user=postgres
+  bundle exec hanami db migrate
   set -e
 
   exec bundle exec puma -p 8080
