@@ -1,0 +1,38 @@
+version: "3"
+services:
+  app:
+    # image: "${IMAGE:-ett-de:dev}"
+    build: .
+    environment:
+      - POSTGRES_URL=postgres://postgres:postgres@postgres:5432/cloud_importer_test
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+      - REDIS_URL=redis://redis:6379
+      - ENV=development
+      - HANAMI_ENV=development
+    links:
+      - postgres
+      - rabbitmq
+      - redis
+  worker:
+    # image: "${IMAGE:-ett-de:dev}"
+    build: .
+    command: 'worker'
+    environment:
+      - POSTGRES_URL=postgres://postgres:postgres@postgres:5432/cloud_importer_test
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+      - REDIS_URL=redis://redis:6379
+      - ENV=development
+      - HANAMI_ENV=development
+    links:
+      - postgres
+      - rabbitmq
+      - redis
+
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+  rabbitmq:
+    image: rabbitmq
+  redis:
+    image: redis
