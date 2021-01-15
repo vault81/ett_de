@@ -22,7 +22,7 @@
         <th><%= player.ett_wins %> </th>
         <th><%= player.ett_losses %> </th>
         <th><%= player.ett_status %> </th>
-        <th><%= player.ett_last_online.nil? ? 'x' : format_time((Time.now - player.ett_last_online).to_i) %> s </th>
+        <th><%= player.ett_last_online.nil? ? 'x' : format_time((Time.now - player.ett_last_online).to_i) %></th>
       </tr>
     <% end %>
     </table>
