@@ -11,11 +11,11 @@ class RefreshPlayers
           attrs = EttAPI.fetch_player(player.ett_id)
 
           repo.update(player.id, attrs)
-          sleep 2
+          sleep 5
         end
-        puts 'Sleeping 1 minute'
+        puts 'Sleeping 5 minutes'
 
-        sleep 60
+        sleep 60 * 5
       end
     end
 
