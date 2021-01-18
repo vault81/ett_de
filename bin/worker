@@ -1,0 +1,17 @@
+#!/bin/env ruby
+require './config/boot'
+
+$LOAD_PATH << './lib'
+
+require 'refresh_players'
+
+puts 'Starting worker'
+
+case $ARGV[0]
+when 'ett_api'
+  RefreshPlayers.run
+when 'log_collector_api'
+  RefreshPlayers.run_log
+else
+  puts "No worker called #{$ARGV[0]} found"
+end

@@ -2,12 +2,16 @@ source 'https://rubygems.org'
 
 gem 'rake'
 gem 'hanami', '~> 1.3'
-gem 'hanami-model', '~> 1.3'
+
+# gem 'hanami-model', '~> 1.3'
+gem 'hanami-model', git: 'https://github.com/hanami/model.git', require: false
 gem 'warning'
 gem 'faraday'
 gem 'oj'
-
-gem 'sqlite3'
+gem 'sidekiq'
+gem 'dotenv', '~> 2.4'
+gem 'sequel'
+gem 'sequel_pg', require: false
 
 group :development do
   # Code reloading
@@ -17,7 +21,8 @@ group :development do
 end
 
 group :test, :development do
-  gem 'dotenv', '~> 2.4'
+  gem 'sqlite3'
+  gem 'pry'
 end
 
 group :test do
@@ -26,5 +31,6 @@ group :test do
 end
 
 group :production do
-  # gem 'puma'
+  gem 'puma'
+  gem 'pg'
 end

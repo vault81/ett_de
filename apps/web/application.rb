@@ -1,6 +1,10 @@
 require 'hanami/helpers'
 require 'hanami/assets'
 require 'warning'
+
+$LOAD_PATH << './lib'
+require 'workers/hard_worker'
+
 Gem.path.each { |path| Warning.ignore(//, path) }
 
 module Web
@@ -141,7 +145,7 @@ module Web
 
         # Specify sources for assets
         #
-        sources << %w[assets]
+        sources << ['assets']
       end
 
       ##
@@ -222,7 +226,7 @@ module Web
         frame-ancestors 'self';
         base-uri 'self';
         default-src 'none';
-        script-src 'self';
+        script-src 'self' 'unsafe-inline' vlt81.de;
         connect-src 'self';
         img-src 'self' https: data:;
         style-src 'self' 'unsafe-inline' https:;
@@ -280,18 +284,17 @@ module Web
       # scheme 'https'
       # host   'example.org'
       # port   443
+      # handle_exceptions false
 
       assets do
         # Don't compile static assets in production mode (eg. Sass, ES6)
         #
         # See: http://www.rubydoc.info/gems/hanami-assets#Configuration
-        compile false
-
+        compile true
         # Use fingerprint file name for asset paths
         #
         # See: https://guides.hanamirb.org/assets/overview
-        fingerprint true
-
+        # fingerprint true
         # Content Delivery Network (CDN)
         #
         # See: https://guides.hanamirb.org/assets/content-delivery-network
@@ -299,11 +302,10 @@ module Web
         # scheme 'https'
         # host   'cdn.example.org'
         # port   443
-
         # Subresource Integrity
         #
         # See: https://guides.hanamirb.org/assets/content-delivery-network/#subresource-integrity
-        subresource_integrity :sha256
+        # subresource_integrity :sha256
       end
     end
   end

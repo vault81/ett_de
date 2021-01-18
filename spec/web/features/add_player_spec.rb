@@ -8,7 +8,7 @@ RSpec.describe 'Add a book' do
     visit '/players/new'
 
     within 'form#player-form' do
-      fill_in 'Ett id', with: '200672'
+      fill_in 'Ett id or name', with: '200672'
 
       click_button 'Create'
     end

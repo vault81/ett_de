@@ -1,16 +1,42 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn rounded-pill btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button>
 
-<div class="form-floating mb-3">
-  <h2>Add Player</h2>
-<%=
-  form_for :player, '/players' do
-    div class: 'input form-control' do
-      label      :ett_id
-      text_field :ett_id
-    end
+<div class="modal fade" id="exampleModal" tabindex="-1">
 
-    div class: 'controls' do
-      submit 'Create Player', class: 'btn btn-primary'
-    end
-  end
-%>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Player</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+      </div>
+      <!-- <div class="modal-body"> -->
+
+
+      <!-- <div class="form-floating mb-3"> -->
+      <!-- <h2>Add Player/h2> -->
+      <%=
+      form_for :player, '/players' do
+        div class: 'modal-body' do
+          div class: 'input form-control' do
+            label      :ett_id_or_name
+            text_field :ett_id_or_name
+          end
+        end
+
+        div class: 'modal-footer' do
+          div class: 'controls' do
+            button 'Close', type: "button", class: "btn btn-secondary", "data-bs-dismiss":  "modal"
+
+            submit 'Create Player', class: 'btn btn-primary'
+          end
+        end
+      end
+      %>
+      <!-- </div> -->
+
+
+
+    </div>
+  </div>
 </div>
+<!-- </div> -->
