@@ -19,7 +19,7 @@
           </tr>
           <% players.each.with_index do |player, i| %>
             <tr class="player">
-              <th scope="row">#<%= i+1 %></th>
+              <th scope="row"><%= format_rank(i+1) %></th>
               <th><%= player.ett_name %></th>
               <th><%= player.ett_elo %> </th>
               <th><%= player.ett_wins %> </th>

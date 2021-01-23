@@ -13,7 +13,7 @@ module Web
           when 3
             '🥉'
           else
-            rank.to_s
+            "#{rank}"
           end
         end
 
