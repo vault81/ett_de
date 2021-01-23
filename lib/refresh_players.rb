@@ -6,6 +6,7 @@ class RefreshPlayers
       new.run_log
     rescue StandardError => e
       log_error(e)
+      sleep 120
       run_log
     end
 
@@ -13,6 +14,7 @@ class RefreshPlayers
       new.run
     rescue StandardError => e
       log_error(e)
+      sleep 300
       run
     end
 

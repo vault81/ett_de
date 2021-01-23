@@ -4,6 +4,19 @@ module Web
       class Index
         include Web::View
 
+        def format_rank(rank)
+          case rank
+          when 1
+            '🥇'
+          when 2
+            '🥈'
+          when 3
+            '🥉'
+          else
+            rank.to_s
+          end
+        end
+
         # def div
         def collapse(id, &block)
           button(
