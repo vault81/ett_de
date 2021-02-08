@@ -1,7 +1,16 @@
 require 'ett_api'
+require 'challonge'
 
 class RefreshPlayers
   class << self
+    def run_challonge
+      new.run_challonge
+    rescue StandardError => e
+      log_error(e)
+      sleep 120
+      run_challonge
+    end
+
     def run_log
       new.run_log
     rescue StandardError => e
@@ -69,9 +78,47 @@ class RefreshPlayers
     end
   end
 
+  def run_challonge
+    TournamentRepository
+      .new
+      .all
+      .map { |tournament| refresh_tournament(tournament.challonge_url) }
+  end
+
+  def refresh_tournament(url = '11_GER_ibtnaetx')
+    resp = Challonge.new.get(url)
+    tournament = persist_tournament(resp[:tournament])
+    persist_tournament_memberships(resp[:tournament][:participants], tournament)
+  end
+
   private
 
   attr_reader :log
+
+  def persist_tournament(resp)
+    TournamentRepository.new.update_or_create(
+      resp[:id],
+      { challonge_state: resp[:state] }
+    )
+  end
+
+  def persist_tournament_memberships(participants_resp, tournament)
+    participants_resp.map { |e| e[:participant] }.map do |part|
+      pp '------------'
+      pp part[:display_name].split(' ').first
+      player =
+        PlayerRepository.new.find_by_ett_name(
+          part[:display_name].split(' ').first
+        )
+
+      next if player.nil?
+      pp '================'
+      TournamentMembershipRepository.new.find_or_create(
+        player.id,
+        tournament.id
+      )
+    end
+  end
 
   def build_log_for_player(id)
     return 'broken ' if log[:OnlineUses].nil?

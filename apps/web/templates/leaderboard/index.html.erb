@@ -9,6 +9,7 @@
 
           <tr class="header">
             <th scope="col">Rank</th>
+            <th scope="col">Liga</th>
             <th scope="col">Nickname</th>
             <th scope="col">Elo</th>
             <th scope="col">Wins</th>
@@ -20,6 +21,7 @@
           <% players.each.with_index do |player, i| %>
             <tr class="player">
               <th scope="row"><%= format_rank(i+1) %></th>
+              <th><%= player.tournaments.first&.short_name %></th>
               <th><%= player.ett_name %></th>
               <th><%= player.ett_elo %> </th>
               <th><%= player.ett_wins %> </th>

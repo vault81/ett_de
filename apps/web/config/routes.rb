@@ -6,3 +6,5 @@
 get '/leaderboard', to: 'leaderboard#index'
 get '/players/new', to: 'players#new'
 post '/players', to: 'players#create'
+get '/tournaments/new', to: 'tournaments#new'
+post '/tournaments', to: 'tournaments#create'
