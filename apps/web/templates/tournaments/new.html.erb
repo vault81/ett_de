@@ -1,0 +1,56 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn rounded-pill btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Tournament</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+      </div>
+      <!-- <div class="modal-body"> -->
+
+
+      <!-- <div class="form-floating mb-3"> -->
+      <!-- <h2>Add Player/h2> -->
+      <%=
+      form_for :tournament, '/tournaments' do
+        div class: 'modal-body' do
+          div class: 'input form-control' do
+            label      :challonge_url
+            text_field :challonge_url
+          end
+          div class: 'input form-control' do
+            label      :name
+            text_field :name
+          end
+          div class: 'input form-control' do
+            label      :short_name
+            text_field :short_name
+          end
+          div class: 'input form-control' do
+            label      :rank
+            text_field :rank
+          end
+          div class: 'input form-control' do
+            label      :color_hex
+            text_field :color_hex
+          end
+        end
+
+        div class: 'modal-footer' do
+          div class: 'controls' do
+            button 'Close', type: "button", class: "btn btn-secondary", "data-bs-dismiss":  "modal"
+
+            submit 'Create Tournament', class: 'btn btn-primary'
+          end
+        end
+      end
+      %>
+      <!-- </div> -->
+
+    </div>
+  </div>
+</div>
+<!-- </div> -->
