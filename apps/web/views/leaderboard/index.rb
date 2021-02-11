@@ -18,7 +18,7 @@ module Web
         end
 
         GREEN = '329932'
-        BLUE = '#1111ee'
+        BLUE = '1111ee'
         LIGTHEN = %w[ee d0 99 73 44]
         def league_color(league)
           color =
