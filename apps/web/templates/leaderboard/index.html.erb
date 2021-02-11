@@ -9,12 +9,22 @@
 
           <tr class="header">
             <th scope="col">Rank</th>
-            <th scope="col">Liga</th>
+            <th scope="col">
+              <a href="leaderboard?order[]=league" class="link-secondary">Liga</a>
+            </th>
             <th scope="col">Nickname</th>
-            <th scope="col">Elo</th>
-            <th scope="col">Wins</th>
-            <th scope="col">Losses</th>
-            <th scope="col">Status</th>
+            <th scope="col">
+              <a href="leaderboard" class="link-secondary">Elo</a>
+            </th>
+            <th scope="col">
+              <a href="leaderboard?order[]=ett_wins" class="link-secondary">Wins</a>
+            </th>
+            <th scope="col">
+              <a href="leaderboard?order[]=ett_losses" class="link-secondary">Losses</a>
+            </th>
+            <th scope="col">
+              <a href="leaderboard?order[]=ett_status" class="link-secondary">Status</a>
+            </th>
             <th scope="col">Zuletzt gesehen</th>
             <th scope="col">Match Info</th>
           </tr>
@@ -30,12 +40,12 @@
               <th>
                 <!-- <button class="btn-small small rounded-pill btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=i %>-1"> -->
                 <!-- Show -->
-                  <!-- </button> -->
+                <!-- </button> -->
                 <!-- <div class="collapse" id="collapse<%=i %>-1"> -->
 
                 <%= player.ett_last_online.nil? ? 'x' : format_time((Time.now - player.ett_last_online).to_i) %></th>
-                <% match_info = match_infos.find {|i| i.player_id == player.id }&.test&.deep_symbolize %>
-                  <!-- </div> -->
+              <% match_info = match_infos.find {|i| i.player_id == player.id }&.test&.deep_symbolize %>
+              <!-- </div> -->
               <th>
                 <% if match_info&.has_key?(:rounds) %>
                   <div>
