@@ -48,8 +48,7 @@ class RefreshPlayers
         puts attrs
         repo.update(player.id, attrs)
 
-        attrs = find_match(player.ett_id)
-        p attrs
+        attrs = build_match(player.ett_id)
         MatchInfoRepository.new.update_or_create(player.id, test: attrs)
       end
       puts 'Sleeping 15 secs'
@@ -87,8 +86,8 @@ class RefreshPlayers
 
   def refresh_tournament(url = '11_GER_ibtnaetx')
     resp = Challonge.new.get(url)
-    tournament = persist_tournament(resp[:tournament])
-    persist_tournament_memberships(resp[:tournament][:participants], tournament)
+    persist_tournament(resp[:tournament])
+    # persist_tournament_memberships(resp[:tournament][:participants], tournament)
   end
 
   private
@@ -102,23 +101,24 @@ class RefreshPlayers
     )
   end
 
+  # rubocop:disable Metrics/MethodLength
   def persist_tournament_memberships(participants_resp, tournament)
     participants_resp.map { |e| e[:participant] }.map do |part|
-      pp '------------'
-      pp part[:display_name].split(' ').first
       player =
         PlayerRepository.new.find_by_ett_name(
           part[:display_name].split(' ').first
         )
 
       next if player.nil?
-      pp '================'
+
       TournamentMembershipRepository.new.find_or_create(
         player.id,
         tournament.id
       )
     end
   end
+
+  # rubocop:enable Metrics/MethodLength
 
   def build_log_for_player(id)
     return 'broken ' if log[:OnlineUses].nil?
@@ -128,22 +128,15 @@ class RefreshPlayers
     'inroom'
   end
 
-  def find_match(id)
-    return {} if log[:ActiveMatches].nil?
-    match =
-      log[:ActiveMatches].find do |match|
-        match[:HomePlayer][:Id] == id.to_s || match[:AwayPlayer][:Id] == id.to_s
-      end
+  # rubocop:disable Metrics/MethodLength
+  def build_match(id)
+    match = find_match(id)
     return {} if match.nil?
 
-    player_state = (match[:HomePlayer][:Id] == id.to_s) ? 'home' : 'away'
-    rounds =
-      match[:Rounds].sort_by { |round| round[:RoundNumber] }.map do |round|
-        round.slice(:HomeScore, :AwayScore)
-      end
+    rounds = build_rounds(match)
 
     {
-      player_state: player_state,
+      player_state: match[:HomePlayer][:Id] == id.to_s ? 'home' : 'away',
       home_player_id: match[:HomePlayer][:Id],
       home_player_name: match[:HomePlayer][:UserName],
       away_player_id: match[:AwayPlayer][:Id],
@@ -151,6 +144,22 @@ class RefreshPlayers
       rounds_count: match[:Rounds].count,
       rounds: rounds
     }
+  end
+
+  # rubocop:enable Metrics/MethodLength
+
+  def find_match(id)
+    return nil if log[:ActiveMatches].nil?
+
+    log[:ActiveMatches].find do |match|
+      match[:HomePlayer][:Id] == id.to_s || match[:AwayPlayer][:Id] == id.to_s
+    end
+  end
+
+  def build_rounds(match)
+    match[:Rounds].sort_by { |round| round[:RoundNumber] }.map do |round|
+      round.slice(:HomeScore, :AwayScore)
+    end
   end
 
   def repo

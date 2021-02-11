@@ -1,0 +1,154 @@
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  Exclude:
+    - db/**/*
+    - config/**/*
+    - script/**/*
+    - Rakefile
+    - Guardfile
+    - bin/*
+    - tmp/**/*
+  TargetRubyVersion: 2.7
+
+Style:
+  Enabled: false
+
+Layout:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false
+
+Style/SlicingWithRange:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+
+Lint/DuplicateElsifCondition:
+  Enabled: true
+
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: true
+
+Lint/DuplicateRescueException:
+  Enabled: true
+
+Lint/EmptyConditionalBody:
+  Enabled: true
+
+Lint/FloatComparison:
+  Enabled: true
+
+Lint/MissingSuper:
+  Enabled: true
+
+Lint/OutOfRangeRegexpRef:
+  Enabled: true
+
+Lint/SelfAssignment:
+  Enabled: true
+
+Lint/TopLevelReturnWithArgument:
+  Enabled: true
+
+Lint/UnreachableLoop:
+  Enabled: true
+
+Metrics/BlockLength:
+  CountComments: false
+  Max: 25
+  Exclude:
+    - "spec/**/*.rb"
+    - "test/**/*.rb"
+    - "Rakefile"
+    - "*.gemspec"
+    - "apps/api/application.rb"
+    - "**/*.rake"
+
+Metrics/ClassLength:
+  CountComments: false
+  Exclude:
+    - "spec/**/*.rb"
+    - "test/**/*.rb"
+
+Metrics/MethodLength:
+  Enabled: true
+  Exclude:
+    - "spec/**/*.rb"
+    - "test/**/*.rb"
+
+Metrics/ModuleLength:
+  CountComments: false
+  Exclude:
+    - "spec/**/*.rb"
+    - "test/**/*.rb"
+
+require: rubocop-rspec
+# When adding a new setting below here, please provide a reason with it.
+
+# Excluded for some folders because we want this rule only for unit specs
+RSpec/DescribeClass:
+  Exclude:
+    - spec/features/*
+    - spec/integration/*
+
+# Avoid filename issues with Minitest filenames
+RSpec/FilePath:
+  Exclude:
+    - "test/**/*.rb"
+
+# Next to the advantages, the check for verified doubles also means that
+# something about Y being checked in a spec that is about X, which is not
+# really clean. So it's not enabled by default.
+# refs https://relishapp.com/rspec/rspec-mocks/docs/verifying-doubles
+RSpec/VerifiedDoubles:
+  Enabled: false
+
+###
+# Disabled initially
+###
+RSpec/DescribedClass:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MessageSpies:
+  Enabled: false
+
+RSpec/MessageChain:
+  Enabled: false
+
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
