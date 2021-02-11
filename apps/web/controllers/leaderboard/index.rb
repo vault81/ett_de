@@ -36,7 +36,7 @@ module Web
         private
 
         def ordered_players
-          return league_ordered_players if params[:order].include?('league')
+          return league_ordered_players if params[:order]&.include?('league')
           PlayerRepository.new.all_in_order(
             params[:order]&.map { |p| p.to_sym } || :ett_elo
           )
