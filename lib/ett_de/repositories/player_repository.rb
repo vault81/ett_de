@@ -4,6 +4,10 @@ class PlayerRepository < Hanami::Repository
     has_many :tournaments, through: :tournament_memberships
   end
 
+  def all_in_order(order)
+    aggregate(:tournaments).where.order(order).reverse.to_a
+  end
+
   def all_by_elo
     aggregate(:tournaments).where.order(:ett_elo).reverse.to_a
   end
