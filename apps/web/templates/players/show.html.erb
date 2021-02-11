@@ -1,0 +1,23 @@
+<div class="container">
+  <div>
+    <div>
+      <div class="card position-absolute top-50 start-50 translate-middle" style="width: 48rem;">
+        <!-- <img src="..." class="card-img-top" alt="..."> -->
+        <div class="card-body">
+          <h5 class="card-title">Spieleruebersicht</h5>
+          <div class="card-text">
+            <table class="table table-hover table-striped">
+              <% player.to_h.slice(:ett_id, :ett_wins, :ett_losses, :ett_elo, :ett_status, :ett_last_online).each do |k,v| %>
+                <tr>
+                  <th><%= titleize(k.to_s.split("ett_").join('')) %></th>
+                  <th><%= v.to_s %></th>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+          <a href="/leaderboard" class="btn btn-secondary">Back to leaderboard</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

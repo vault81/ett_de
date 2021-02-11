@@ -1,7 +1,11 @@
 class PlayerRepository < Hanami::Repository
   associations do
+    has_one :match_info
     has_many :tournament_memberships
     has_many :tournaments, through: :tournament_memberships
+  end
+  def find_with_relations(id)
+    aggregate(:tournaments, :match_info).where(id: id).one
   end
 
   def all_with_tournaments
