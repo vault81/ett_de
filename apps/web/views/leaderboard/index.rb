@@ -17,6 +17,32 @@ module Web
           end
         end
 
+        def league_color(league)
+          color =
+            case league&.rank
+            when 1
+              '329932'
+            when 2
+              '4ca64c'
+            when 3
+              '66b266'
+            when 4
+              'add8e6'
+            when 5
+              '9bc2cf'
+            when 6
+              '8aacb8'
+            when 7
+              '7997a1'
+            when 8
+              '67818a'
+            else
+              return ''
+            end
+
+          "background-color: \##{color};"
+        end
+
         # def div
         def collapse(id, &block)
           button(
