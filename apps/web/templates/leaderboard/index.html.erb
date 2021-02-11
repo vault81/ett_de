@@ -13,6 +13,7 @@
               <a href="leaderboard?order[]=league" class="link-secondary">Liga</a>
             </th>
             <th scope="col">Nickname</th>
+            <th scope="col">ETT ID</th>
             <th scope="col">
               <a href="leaderboard" class="link-secondary">Elo</a>
             </th>
@@ -33,6 +34,7 @@
               <th scope="row"><%= format_rank(i+1) %></th>
               <th><%= player.tournaments.first&.short_name %></th>
               <th><%= player.ett_name %></th>
+              <th><%= player.ett_id %></th>
               <th><%= player.ett_elo %> </th>
               <th><%= player.ett_wins %> </th>
               <th><%= player.ett_losses %> </th>
