@@ -16,7 +16,10 @@ gem 'sequel_pg', require: false
 group :development do
   # Code reloading
   # See: https://guides.hanamirb.org/projects/code-reloading
+  gem 'rubocop'
+  gem 'rubocop-rspec'
   gem 'shotgun', platforms: :ruby
+  gem 'solargraph'
   gem 'hanami-webconsole'
 end
 
