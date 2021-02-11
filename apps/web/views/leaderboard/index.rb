@@ -28,13 +28,13 @@ module Web
             when 1
               GREEN + LIGTHEN[3]
             when 2
-              BLUE + LIGTHEN[0]
-            when 3
               BLUE + LIGTHEN[1]
-            when 4
+            when 3
               BLUE + LIGTHEN[2]
-            when 5
+            when 4
               BLUE + LIGTHEN[3]
+            when 5
+              BLUE + LIGTHEN[4]
             else
               return ''
             end
