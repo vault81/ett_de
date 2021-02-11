@@ -20,21 +20,17 @@ module Web
         def league_color(league)
           color =
             case league&.rank
-            when -1
-              '329932'
             when 0
-              '4ca64c'
+              '329932'
             when 1
               '66b266'
             when 2
               'add8e6'
             when 3
-              '9bc2cf'
-            when 4
               '8aacb8'
-            when 5
+            when 4
               '7997a1'
-            when 6
+            when 5
               '67818a'
             else
               return ''
