@@ -15,6 +15,10 @@ if [ "$1" = "test" ]; then
   set -e
   bundle exec hanami db migrate
   exec bundle exec rake
+elif [ "$1" = "rebuild_leagues" ]; then
+
+  bundle exec rake seed:clear_leagues
+  bundle exec rake seed:leagues
 elif [ "$1" = "worker" ]; then
   createdb --host=postgres -w ett_de_production --user=postgres
   bundle exec hanami db migrate
