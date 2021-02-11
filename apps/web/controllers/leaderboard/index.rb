@@ -45,7 +45,7 @@ module Web
         def league_ordered_players
           players = PlayerRepository.new.all_in_order(:ett_elo)
           players.sort_by do |player|
-            [player.tournaments.first&.short_name, -player.ett_elo.to_i]
+            [player.tournaments.first&.rank, -player.ett_elo.to_i]
           end
         end
       end
