@@ -19,4 +19,12 @@ class PlayerRepository < Hanami::Repository
   def find_by_ett_name(ett_name)
     players.where(ett_name: ett_name).one
   end
+
+  def find_or_create(params)
+    entity = players.where(params.slice(:ett_id)).one
+
+    return entity unless entity.nil?
+
+    create(params)
+  end
 end

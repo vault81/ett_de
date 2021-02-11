@@ -1,5 +1,4 @@
 require 'bundler/setup'
-
 require 'hanami/setup'
 require 'hanami/model'
 
@@ -23,7 +22,7 @@ Hanami.configure do
     #    adapter :sql, 'postgresql://localhost/ett_de_development'
     #    adapter :sql, 'mysql://localhost/ett_de_development'
     #
-    adapter :sql, ENV.fetch('DATABASE_URL')
+    adapter :sql, ENV.fetch('DATABASE_URL') || ENV.fetch('POSTGRES_URL')
 
     gateway { |g| g.connection.extension(:pg_json) }
 
