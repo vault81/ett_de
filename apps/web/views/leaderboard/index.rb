@@ -19,7 +19,7 @@ module Web
 
         GREEN = '329932'
         BLUE = '1111ee'
-        LIGTHEN = %w[e0 d0 99 73 44]
+        LIGTHEN = %w[d0 a0 78 44]
         def league_color(league)
           color =
             case league&.rank
@@ -30,11 +30,11 @@ module Web
             when 2
               BLUE + LIGTHEN[0]
             when 3
-              BLUE + LIGTHEN[2]
+              BLUE + LIGTHEN[1]
             when 4
-              BLUE + LIGTHEN[3]
+              BLUE + LIGTHEN[2]
             when 5
-              BLUE + LIGTHEN[4]
+              BLUE + LIGTHEN[3]
             else
               return ''
             end
