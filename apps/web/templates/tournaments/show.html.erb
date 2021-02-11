@@ -1,0 +1,44 @@
+
+<div class="container">
+  <div>
+    <div>
+      <div class="card position-absolute top-50 start-50 translate-middle" style="width: 48rem;">
+        <!-- <img src="..." class="card-img-top" alt="..."> -->
+        <div class="card-body">
+          <h5 class="card-title">Turnieruebersicht</h5>
+          <div class="card-text">
+            <table class="table table-hover table-striped">
+              <% tournament.to_h.slice(:challonge_id, :challonge_name, :name, :short_name, :challonge_state, :rank).each do |k,v| %>
+                <tr>
+                  <th><%= titleize(k.to_s) %></th>
+                  <th><%= v.to_s %></th>
+                </tr>
+              <% end %>
+            </table>
+
+            <%#=tournament.members.map(&:to_h).to_json %>
+
+            <h6> Teilnehmer: </h6>
+            <table class="table table-hover table-striped">
+              <% keys=[:ett_elo, :ett_name] %>
+              <tr>
+                <% keys.map do |key| %>
+                  <th><%= titleize(key.to_s) %></th>
+                <% end %>
+              </tr>
+
+                <% tournament.members.map do |member| %>
+                  <tr>
+                  <% keys.map do |key| %>
+                  <th><%= member.to_h[key].to_s %></th>
+                  <% end %>
+                  </tr>
+                <% end %>
+            </table>
+          </div>
+          <a href="/leaderboard" class="btn btn-secondary">Back to leaderboard</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
