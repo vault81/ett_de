@@ -37,13 +37,15 @@ module Web
 
         def ordered_players
           return league_ordered_players if params[:order]&.include?('league')
-          PlayerRepository.new.all_in_order(
-            params[:order]&.map { |p| p.to_sym } || :ett_elo
-          )
+          order = params[:order]&.map { |p| p.to_sym }
+          order << :ett_elo unless order.nil?
+
+          PlayerRepository.new.all_in_order(order || [:ett_elo])
         end
 
         def league_ordered_players
-          players = PlayerRepository.new.all_in_order(:ett_elo)
+          players = PlayerRepository.new.all_with_tournaments
+
           players.sort_by do |player|
             [
               player.tournaments.first&.rank || 999_999_999,
