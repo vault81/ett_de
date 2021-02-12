@@ -29,11 +29,11 @@ class AppsignalURL
     url = Rack::Request.new(env).url
     path = URI.parse(url).path
     env['appsignal.route'] =
-      if path.start_with('/assets')
+      if path.start_with?('/assets')
         '/assets'
-      elsif path.start_with('/players')
+      elsif path.start_with?('/players')
         res('players')
-      elsif path.start_with('/tournaments')
+      elsif path.start_with?('/tournaments')
         res('tournaments')
       else
         path
@@ -45,9 +45,9 @@ class AppsignalURL
   private
 
   def res(name)
-    if path.end_with(res)
+    if path.end_with?(name)
       "/#{name}"
-    elsif path.end_with('new')
+    elsif path.end_with?('new')
       "/#{name}/new"
     else
       "/#{name}/:id"
