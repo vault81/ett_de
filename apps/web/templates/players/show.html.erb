@@ -7,7 +7,7 @@
           <h5 class="card-title">Spieleruebersicht</h5>
           <div class="card-text">
             <table class="table table-hover table-striped">
-              <% player.to_h.slice(:ett_id, :ett_wins, :ett_losses, :ett_elo, :ett_status, :ett_last_online).each do |k,v| %>
+              <% player.to_h.slice(:ett_id, :ett_name, :ett_wins, :ett_losses, :ett_elo, :ett_status, :ett_last_online).each do |k,v| %>
                 <tr>
                   <th><%= titleize(k.to_s.split("ett_").join('')) %></th>
                   <th><%= v.to_s %></th>

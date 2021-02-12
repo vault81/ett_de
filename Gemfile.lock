@@ -17,6 +17,8 @@ GEM
   specs:
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    appsignal (2.11.6)
+      rack
     ast (2.4.2)
     backport (1.1.2)
     benchmark (0.1.1)
@@ -261,6 +263,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  appsignal
   capybara
   dotenv (~> 2.4)
   faraday

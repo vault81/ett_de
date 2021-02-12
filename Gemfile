@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'appsignal'
 gem 'rake'
 gem 'hanami', '~> 1.3'
 
