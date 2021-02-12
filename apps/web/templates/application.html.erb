@@ -12,14 +12,11 @@
   </head>
 
   <body class="bg-light">
-    <div class="container-fluid bg-light">
-      <%= yield %>
-    </div>
-
-
-
     <%= javascript 'bootstrap.bundle.min' %>
     <script src="https://vlt81.de/assets/bootstrap.min.js"></script>
 
+    <div class="container-fluid bg-light">
+      <%= yield %>
+    </div>
   </body>
 </html>
