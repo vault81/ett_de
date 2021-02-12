@@ -14,7 +14,7 @@ Appsignal.config =
   Appsignal::Config.new(
     Hanami.root,
     p(Hanami.env),
-    name: 'logbrowser' # Optional configuration hash
+    name: 'ett_de' # Optional configuration hash
   )
 
 p Appsignal.start # Start the AppSignal integration
