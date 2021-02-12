@@ -1,4 +1,5 @@
 require 'bundler/setup'
+require 'appsignal' # Load AppSignal
 require 'hanami/setup'
 require 'hanami/model'
 
@@ -7,8 +8,6 @@ require_relative '../apps/web/application'
 require_relative './sidekiq'
 require 'pg'
 require 'pry'
-
-require 'appsignal' # Load AppSignal
 
 Appsignal.config =
   Appsignal::Config.new(
