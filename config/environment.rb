@@ -19,7 +19,20 @@ Appsignal.config =
 p Appsignal.start # Start the AppSignal integration
 Appsignal.start_logger # Start logger
 
+class AppsignalURL
+  def initialize(app, options = {})
+    @app = app
+    @options = options
+  end
+
+  def call(env)
+    env['appsignal.route'] = Rack::Request.new(env).url
+    @app.call(env)
+  end
+end
+
 Hanami.configure do
+  middleware.use AppsignalURL
   middleware.use Appsignal::Rack::GenericInstrumentation
   mount Web::Application, at: '/'
 
