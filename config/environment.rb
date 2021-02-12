@@ -32,9 +32,9 @@ class AppsignalURL
       if path.start_with?('/assets')
         '/assets'
       elsif path.start_with?('/players')
-        res('players')
+        res(path, 'players')
       elsif path.start_with?('/tournaments')
-        res('tournaments')
+        res(path, 'tournaments')
       else
         path
       end
@@ -44,7 +44,7 @@ class AppsignalURL
 
   private
 
-  def res(name)
+  def res(path, name)
     if path.end_with?(name)
       "/#{name}"
     elsif path.end_with?('new')
