@@ -8,6 +8,18 @@ require_relative './sidekiq'
 require 'pg'
 require 'pry'
 
+require 'appsignal' # Load AppSignal
+
+Appsignal.config =
+  Appsignal::Config.new(
+    Hanami.root,
+    p(Hanami.env),
+    name: 'ett_de' # Optional configuration hash
+  )
+
+p Appsignal.start # Start the AppSignal integration
+Appsignal.start_logger # Start logger
+
 Hanami.configure do
   mount Web::Application, at: '/'
 
