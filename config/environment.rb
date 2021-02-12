@@ -26,8 +26,32 @@ class AppsignalURL
   end
 
   def call(env)
-    env['appsignal.route'] = Rack::Request.new(env).url
+    url = Rack::Request.new(env).url
+    path = URI.parse(url).path
+    env['appsignal.route'] =
+      if path.starts_with('/assets')
+        '/assets'
+      elsif path.starts_with('/players')
+        res('players')
+      elsif path.starts_with('/tournaments')
+        res('tournaments')
+      else
+        path
+      end
+
     @app.call(env)
+  end
+
+  private
+
+  def res(name)
+    if path.ends_with(res)
+      "/#{name}"
+    elsif path.ends_with('new')
+      "/#{name}/new"
+    else
+      "/#{name}/:id"
+    end
   end
 end
 
