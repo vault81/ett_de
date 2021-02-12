@@ -1,0 +1,3 @@
+# Example: config/appsignal.yml
+production:
+  revision: "<%= `git log --pretty=format:'%h' -n 1` %>"
