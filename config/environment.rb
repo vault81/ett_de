@@ -21,6 +21,7 @@ p Appsignal.start # Start the AppSignal integration
 Appsignal.start_logger # Start logger
 
 Hanami.configure do
+  middleware.use Appsignal::Rack::GenericInstrumentation
   mount Web::Application, at: '/'
 
   model do
