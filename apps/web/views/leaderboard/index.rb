@@ -4,6 +4,26 @@ module Web
       class Index
         include Web::View
 
+        def invert_refresh(query_hash)
+          query_hash = query_hash.dup
+          if query_hash['auto_refresh'].nil?
+            query_hash.merge!('auto_refresh' => '1')
+          else
+            query_hash.delete('auto_refresh')
+          end
+          query_hash
+        end
+
+        def res_link(order, args)
+          args.delete(:order)
+          args.delete('order')
+
+          args['order[]'] = order unless order.nil?
+          args_str = args.map { |k, v| "#{k}=#{v}" }.join('&')
+
+          "leaderboard?#{args_str}"
+        end
+
         def format_rank(rank)
           case rank
           when 1

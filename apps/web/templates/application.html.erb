@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<% query_hash = params.env['rack.request.query_hash'] %>
+
 <html lang="en">
   <head>
     <title>ETT DE Leaderboard</title>
@@ -6,7 +8,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="refresh" content="10" />
+    <% unless query_hash['auto_refresh'].nil? %>
+      <meta http-equiv="refresh" content="10" />
+    <% end %>
 
     <%= stylesheet 'bootstrap.min' unless ENV['HANAMI_ENV'] == 'production' %>
     <link href="https://vlt81.de/assets/bootstrap.min.css" rel="stylesheet">
