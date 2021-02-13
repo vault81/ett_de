@@ -1,3 +1,6 @@
+require 'hanami/interactor'
+require 'ett_api'
+
 class PlayerPersistor
   include Hanami::Interactor
 
