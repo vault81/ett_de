@@ -40,7 +40,9 @@ module Web
           order = params[:order]&.map { |p| p.to_sym }
           order << :ett_elo unless order.nil?
 
-          PlayerRepository.new.all_in_order(order || [:ett_elo])
+          players = PlayerRepository.new.all_in_order(order || [:ett_elo])
+          players.reverse! if params[:order]&.include?('ett_status')
+          players
         end
 
         def league_ordered_players
