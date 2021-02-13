@@ -1,119 +1,120 @@
 <% query_hash = params.env['rack.request.query_hash'] %>
 
-<div class="container">
+<div>
+  <div class="card" style="padding: 2rem;margin: 2rem">
+    <div class="d-flex flex-row-reverse">
+      <a href="<%= res_link(query_hash['order']&.first, invert_refresh(query_hash)) %>" class="btn rounded-pill btn-secondary">
 
-  <div class="d-flex flex-row-reverse">
-    <a href="<%= res_link(query_hash['order']&.first, invert_refresh(query_hash)) %>" class="btn rounded-pill btn-secondary">
-
-      <% if query_hash['auto_refresh'].nil? %>
-        🔄❌
-      <% else %>
-        🔄✔️
-      <% end %>
-    </a>
-  </div>
-
-  <% if players.any? %>
-    <div>
-
-      <h1 class="h-1">Deutsche ETT Rangliste</h1>
-      <div id="players">
-        <table class="table table-hover table-striped">
-
-          <tr class="header">
-            <th scope="col">Rank</th>
-            <th scope="col">
-              <a href="<%= res_link('league', query_hash) %>" class="link-dark">Liga</a>
-            </th>
-            <th scope="col">Nickname</th>
-            <th scope="col">ID</th>
-            <th scope="col">
-              <a href="<%= res_link('ett_elo', query_hash) %>" class="link-dark">Elo</a>
-            </th>
-            <th scope="col">
-              <a href="<%= res_link('ett_wins', query_hash) %>" class="link-dark">Wins</a>
-            </th>
-            <th scope="col">
-              <a href="<%= res_link('ett_losses', query_hash) %>" class="link-dark">Losses</a>
-            </th>
-            <th scope="col">
-              <a href="<%= res_link('ett_status', query_hash) %>" class="link-dark">Status</a>
-            </th>
-            <th scope="col">Zuletzt gesehen</th>
-            <th scope="col">Match Info</th>
-          </tr>
-          <% players.each.with_index do |player, i| %>
-            <tr class="player" style="background-color: #<%= raw player.tournaments.first&.color_hex || ''%>;">
-              <th scope="row"><%= format_rank(i+1) %></th>
-              <th>
-                <% unless player.tournaments.first.nil? %>
-                  <a href="/tournaments/<%= player.tournaments.first.id %>" class="link-dark">
-                    <%= player.tournaments.first&.short_name %>
-                  </a>
-                <% end %>
-
-              </th>
-              <th>
-                <a href="/players/<%= player.id %>" class="link-dark">
-                  <%= player.ett_name %>
-                </a>
-              </th>
-              <th><%= player.ett_id %></th>
-              <th><%= player.ett_elo %> </th>
-              <th><%= player.ett_wins %> </th>
-              <th><%= player.ett_losses %> </th>
-              <th><%= player.ett_status %> </th>
-              <th>
-                <!-- <button class="btn-small small rounded-pill btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=i %>-1"> -->
-                <!-- Show -->
-                <!-- </button> -->
-                <!-- <div class="collapse" id="collapse<%=i %>-1"> -->
-
-                <%= player.ett_last_online.nil? ? 'x' : format_time((Time.now - player.ett_last_online).to_i) %></th>
-              <% match_info = match_infos.find {|i| i.player_id == player.id }&.test&.deep_symbolize %>
-              <!-- </div> -->
-              <th>
-                <% if match_info&.has_key?(:rounds) %>
-                  <div>
-
-                    <%  f = format_matchup(match_info) %>
-                    <span class="badge rounded-pill <%=f[0] %>">
-                      <%= match_info[:home_player_name]%>
-                    </span> vs. <span class="badge rounded-pill <%=f[1] %>">
-                      <%= match_info[:away_player_name]%>
-                    </span>
-                    <!-- <p> -->
-                    <button class="btn-small small rounded-pill btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=i %>">
-                      live match 📡
-                    </button>
-                    <!-- </p> -->
-                    <div class="collapse" id="collapse<%=i %>">
-                      <!-- <div class="card card-body"> -->
-                      <% match_info[:rounds].map.with_index do |round, i| %>
-                        <%  f = format_round(round) %>
-                        <%= i == 0 ? '' : ',' %>
-                        <div class="badge <%= f[:left_cl] %>">
-                          <%= round[:HomeScore] %>
-                        </div> - <div class="badge <%= f[:right_cl]%>">
-                          <%= round[:AwayScore] %>
-                        </div>
-                      <% end %>
-                      <!-- </div> -->
-                    </div>
-                  </div>
-                <% else %>
-                  Empty
-                <% end %>
-              </th>
-            </tr>
-          <% end %>
-        </table>
-      </div>
+        <% if query_hash['auto_refresh'].nil? %>
+          🔄❌
+        <% else %>
+          🔄✔️
+        <% end %>
+      </a>
     </div>
-  <% else %>
-    <p class="placeholder">There are no players yet.</p>
-  <% end %>
-  <div class="d-flex flex-row-reverse">
-    <%= render template: 'players/new' %>
+
+    <% if players.any? %>
+      <div>
+
+        <h1 class="h-1">Deutsche ETT Rangliste</h1>
+        <div id="players">
+          <table class="table table-hover table-striped">
+
+            <tr class="header">
+              <th scope="col">Rank</th>
+              <th scope="col">
+                <a href="<%= res_link('league', query_hash) %>" class="link-dark">Liga</a>
+              </th>
+              <th scope="col">Nickname</th>
+              <th scope="col">ID</th>
+              <th scope="col">
+                <a href="<%= res_link('ett_elo', query_hash) %>" class="link-dark">Elo</a>
+              </th>
+              <th scope="col">
+                <a href="<%= res_link('ett_wins', query_hash) %>" class="link-dark">Wins</a>
+              </th>
+              <th scope="col">
+                <a href="<%= res_link('ett_losses', query_hash) %>" class="link-dark">Losses</a>
+              </th>
+              <th scope="col">
+                <a href="<%= res_link('ett_status', query_hash) %>" class="link-dark">Status</a>
+              </th>
+              <th scope="col">Zuletzt gesehen</th>
+              <th scope="col">Match Info</th>
+            </tr>
+            <% players.each.with_index do |player, i| %>
+              <tr class="player" style="background-color: #<%= raw player.tournaments.first&.color_hex || ''%>;">
+                <th scope="row"><%= format_rank(i+1) %></th>
+                <th>
+                  <% unless player.tournaments.first.nil? %>
+                    <a href="/tournaments/<%= player.tournaments.first.id %>" class="link-dark">
+                      <%= player.tournaments.first&.short_name %>
+                    </a>
+                  <% end %>
+
+                </th>
+                <th>
+                  <a href="/players/<%= player.id %>" class="link-dark">
+                    <%= player.ett_name %>
+                  </a>
+                </th>
+                <th><%= player.ett_id %></th>
+                <th><%= player.ett_elo %> </th>
+                <th><%= player.ett_wins %> </th>
+                <th><%= player.ett_losses %> </th>
+                <th><%= player.ett_status %> </th>
+                <th>
+                  <!-- <button class="btn-small small rounded-pill btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=i %>-1"> -->
+                  <!-- Show -->
+                  <!-- </button> -->
+                  <!-- <div class="collapse" id="collapse<%=i %>-1"> -->
+
+                  <%= player.ett_last_online.nil? ? 'x' : format_time((Time.now - player.ett_last_online).to_i) %></th>
+                <% match_info = match_infos.find {|i| i.player_id == player.id }&.test&.deep_symbolize %>
+                <!-- </div> -->
+                <th>
+                  <% if match_info&.has_key?(:rounds) %>
+                    <div>
+
+                      <%  f = format_matchup(match_info) %>
+                      <span class="badge rounded-pill <%=f[0] %>">
+                        <%= match_info[:home_player_name]%>
+                      </span> vs. <span class="badge rounded-pill <%=f[1] %>">
+                        <%= match_info[:away_player_name]%>
+                      </span>
+                      <!-- <p> -->
+                      <button class="btn-small small rounded-pill btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=i %>">
+                        live match 📡
+                      </button>
+                      <!-- </p> -->
+                      <div class="collapse" id="collapse<%=i %>">
+                        <!-- <div class="card card-body"> -->
+                        <% match_info[:rounds].map.with_index do |round, i| %>
+                          <%  f = format_round(round) %>
+                          <%= i == 0 ? '' : ',' %>
+                          <div class="badge <%= f[:left_cl] %>">
+                            <%= round[:HomeScore] %>
+                          </div> - <div class="badge <%= f[:right_cl]%>">
+                            <%= round[:AwayScore] %>
+                          </div>
+                        <% end %>
+                        <!-- </div> -->
+                      </div>
+                    </div>
+                  <% else %>
+                    Empty
+                  <% end %>
+                </th>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    <% else %>
+      <p class="placeholder">There are no players yet.</p>
+    <% end %>
+    <div class="d-flex flex-row-reverse">
+      <%= render template: 'players/new' %>
+    </div>
   </div>
 </div>

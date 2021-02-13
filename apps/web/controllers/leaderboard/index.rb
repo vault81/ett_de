@@ -9,6 +9,7 @@ module Web
 
         params Class.new(Hanami::Action::Params) {
                  predicate(:validorder, message: 'is not cool') do |current|
+                   break false unless current.is_a?(Array)
                    current.any? do |c|
                      %w[
                        ett_elo
