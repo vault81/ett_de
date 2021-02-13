@@ -15,7 +15,9 @@ class TournamentPersistor
 
     attributes[:member_ett_ids]&.map do |member_ett_id|
       puts 'Creating player'
-      player = PlayerPersistor.new.call(member_ett_id)
+      params = EttAPI.fetch_player(member_ett_id)
+      player = PlayerRepository.new.update_or_create_by_ett_id(params)
+
       persist_tournament_member(player, tournament)
     end
     true
