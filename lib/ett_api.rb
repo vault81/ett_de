@@ -92,14 +92,14 @@ class LogCollectorAPI
 end
 
 class EttAPI
+  class APIError < StandardError
+  end
   class << self
     # @param id_or_name [Integer, String]
     # @return [Hash]
     def fetch_player(id_or_name)
       resp = get_player(id_or_name)
-      p resp.class
-
-      raise StandardError unless resp.status == 200
+      raise APIError unless resp.status == 200
 
       data = Oj.load(resp.body, symbol_keys: true)[:data]
       attrs = data[:attributes].merge(ett_id: data[:id])
