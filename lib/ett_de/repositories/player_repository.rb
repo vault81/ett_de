@@ -11,7 +11,7 @@ class PlayerRepository < Hanami::Repository
   end
 
   def all_with_league(order: nil, reverse: nil)
-    query = self.players.where
+    query = self.aggregate(:tournaments)
     query = query.order(order) if order
     query = query.reverse if reverse
 
@@ -49,7 +49,7 @@ class PlayerRepository < Hanami::Repository
   end
 
   def with_league(player)
-    league = tournament_repo.league_for_player(player)
+    league = player.tournaments.sort_by(&:rank).first
     return player if league.nil?
     Player.new(league: league, **player.to_h)
   end
