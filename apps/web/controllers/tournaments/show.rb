@@ -8,7 +8,7 @@ module Web
         expose :tournament
 
         def call(params)
-          mapped_id = ID_MAPPING[params[:id]]
+          mapped_id = ID_MAPPING[params[:id].to_i]
           @tournament =
             TournamentRepository.new.find_with_relations(
               mapped_id || params[:id]
