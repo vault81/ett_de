@@ -59,12 +59,12 @@
                         <th scope="col">Match Info</th>
                     </tr>
                     <% players.each.with_index do |player, i| %>
-                    <tr class="player" style="background-color: #<%= raw player.tournaments.first&.color_hex || ''%>;">
+                    <tr class="player" style="background-color: #<%= raw player.league&.color_hex || ''%>;">
                         <th scope="row"><%= format_rank(i+1) %></th>
                         <th>
-                            <% unless player.tournaments.first.nil? %>
-                            <a href="/tournaments/<%= player.tournaments.first.id %>" class="link-dark">
-                                <%= player.tournaments.first&.short_name %>
+                            <% unless player.league.nil? %>
+                            <a href="/tournaments/<%= player.league.id %>" class="link-dark">
+                                <%= player.league&.short_name %>
                             </a>
                             <% end %>
 

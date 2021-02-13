@@ -1,23 +1,22 @@
 class PlayerRepository < Hanami::Repository
   associations do
     has_one :match_info
+    has_one :tournament, as: :league
     has_many :tournament_memberships
     has_many :tournaments, through: :tournament_memberships
   end
+
   def find_with_relations(id)
     aggregate(:tournaments, :match_info).where(id: id).one
   end
 
-  def all_with_tournaments
-    aggregate(:tournaments).where.to_a
-  end
+  def all_with_league(order: nil, reverse: nil)
+    query = self.players.where
+    query = query.order(order) if order
+    query = query.reverse if reverse
 
-  def all_in_order(order)
-    aggregate(:tournaments).where.order(order).reverse.to_a
-  end
-
-  def all_by_elo
-    aggregate(:tournaments).where.order(:ett_elo).reverse.to_a
+    players = query.map_to(Player).to_a
+    with_leagues(players)
   end
 
   def find_by_ett_name(ett_name)
@@ -41,5 +40,21 @@ class PlayerRepository < Hanami::Repository
     return entity unless entity.nil?
 
     create(params)
+  end
+
+  private
+
+  def with_leagues(players)
+    players.map { |player| with_league(player) }
+  end
+
+  def with_league(player)
+    league = tournament_repo.league_for_player(player)
+    return player if league.nil?
+    Player.new(league: league, **player.to_h)
+  end
+
+  def tournament_repo
+    @tournament_repo ||= TournamentRepository.new
   end
 end
