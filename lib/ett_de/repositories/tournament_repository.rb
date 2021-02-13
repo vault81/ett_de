@@ -4,6 +4,14 @@ class TournamentRepository < Hanami::Repository
     has_many :players, through: :tournament_memberships, as: :members
   end
 
+  def league_for_player(player)
+    tournaments
+      .join(tournament_memberships)
+      .where(tournament_memberships[:player_id] => player.id)
+      .order(:rank)
+      .one
+  end
+
   def find_with_relations(id)
     aggregate(:members).where(id: id).one
   end

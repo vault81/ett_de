@@ -247,10 +247,10 @@ GEM
       thor (~> 1.0)
       tilt (~> 2.0)
       yard (~> 0.9, >= 0.9.24)
-    sqlite3 (1.4.2)
     thor (1.1.0)
     tilt (2.0.10)
     transproc (1.1.1)
+    typespec (0.1.1.1)
     unicode-display_width (2.0.0)
     url_mount (0.2.1)
       rack
@@ -283,8 +283,9 @@ DEPENDENCIES
   shotgun
   sidekiq
   solargraph
-  sqlite3
+  typespec
   warning
+  yard
 
 BUNDLED WITH
    2.2.9

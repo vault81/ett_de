@@ -1,0 +1,16 @@
+---
+include:
+  - "**/*.rb"
+exclude:
+  - spec/**/*
+  - test/**/*
+  - vendor/**/*
+  - ".bundle/**/*"
+require: ['./config/environment']
+domains: []
+reporters:
+  - rubocop
+  - typecheck
+  # - require_not_found
+require_paths: []
+max_files: 5000

@@ -1,61 +1,63 @@
-
-<div class="container">
-  <div>
-    <div>
-      <!-- <div class="card position-absolute top-50 start-50 translate-middle" style="width: 64rem;"> -->
-      <!-- <div class="card-body"> -->
-      <!-- <div class="card-text"> -->
-        <div class="card " style="padding: 2rem;margin: 1rem;width: 72rem;">
-          <h3 class="card-title">Turnieruebersicht</h5>
-        <div id="list-example" class="list-group">
-          <a class="list-group-item list-group-item-action" href="#list-item-1">Allgemein</a>
-          <a class="list-group-item list-group-item-action" href="#list-item-2">Teilnehmer</a>
-          <a class="list-group-item list-group-item-action" href="#list-item-3">Ergebnisse</a>
-        </div>
-        <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
-          <h4 id="list-item-1">Allgemein</h4>
-          <table class="table table-hover table-striped">
-            <% tournament.to_h.slice(:challonge_id, :challonge_name, :name, :short_name, :challonge_state, :rank).each do |k,v| %>
-              <tr>
-                <th><%= titleize(k.to_s) %></th>
-                <th><%= v.to_s %></th>
-              </tr>
-            <% end %>
-          </table>
-
-
-          <!-- <p>...</p> -->
-          <h4 id="list-item-2">Teilnehmer</h4>
-
-          <table class="table table-hover table-striped">
-            <% keys=[:ett_elo, :ett_name] %>
-            <tr>
-              <% keys.map do |key| %>
-                <th><%= titleize(key.to_s) %></th>
-              <% end %>
-            </tr>
-
-            <% tournament.members.map do |member| %>
-              <tr>
-                <% keys.map do |key| %>
-                  <th><%= member.to_h[key].to_s %></th>
-                <% end %>
-              </tr>
-            <% end %>
-          </table>
-
-         <!-- <p>...</p> -->
-          <h4 id="list-item-3">Ergebnisse</h4>
-          <image src="https://challonge.com/<%= tournament.challonge_url%>.svg" class="img-thumbnail" type=""></image>
-          <!-- <p>...</p> -->
-        </div>
-        <!-- <img src="..." class="card-img-top" alt="..."> -->
-                      <%#=tournament.members.map(&:to_h).to_json %>
-
-        <a href="/leaderboard" class="btn btn-secondary">Back to leaderboard</a>
-          </div>
-          <!-- </div> -->
+<div>
+  <div class="card" style="padding: 2rem;margin: 2rem;">
+    <h3 class="card-title">Turnierübersicht</h3>
+    <div id="list-example" class="list-group">
+      <a class="list-group-item list-group-item-action" href="#list-item-1">Allgemein</a>
+      <a class="list-group-item list-group-item-action" href="#list-item-2">Teilnehmer</a>
+      <a class="list-group-item list-group-item-action" href="#list-item-3">Ergebnisse</a>
     </div>
-  </div>
+    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+      <br />
+      <br />
+      <h5 id="list-item-1">Allgemein</h5>
+      <br />
+      <table class="table table-hover table-striped">
+        <% tournament.to_h.slice(:challonge_id, :challonge_name, :name, :short_name, :challonge_state, :rank, :color_hex).each do |k,v| %>
+          <tr>
+            <th><%= titleize(k.to_s) %></th>
+            <th><%= v.to_s %></th>
+          </tr>
+        <% end %>
+      </table>
+
+      <br />
+      <br />
+
+      <h5 id="list-item-2">Teilnehmer</h5>
+      <br />
+
+      <table class="table table-hover table-striped">
+        <% keys=[:ett_name, :ett_elo] %>
+        <tr>
+          <% keys.map do |key| %>
+            <th><%= titleize(key.to_s) %></th>
+          <% end %>
+        </tr>
+        <% tournament.members.map do |member| %>
+          <tr>
+            <% keys.map do |key| %>
+              <th>
+                <% if key ==:ett_name %>
+                  <%=link_to(member.to_h[key].to_s, "/players/#{member.id}" ) %>
+                <% else  %>
+                  <%= member.to_h[key].to_s %>
+                <%  end %>
+              </th>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+
+      <br />
+      <br />
+      <h5 id="list-item-3">Ergebnisse</h5>
+      <br />
+      <div class="d-flex justify-content-center">
+
+        <image src="https://challonge.com/<%= tournament.challonge_url%>.svg" class="img-thumbnail" type=""></image>
+      </div>
+    </div>
+
+    <a href="/leaderboard" class="btn btn-secondary">Back to leaderboard</a>
   </div>
 </div>

@@ -7,9 +7,8 @@ namespace :seed do
     JSON
       .parse(File.read('./rakelib/seed/server_bak.json'))
       .map do |id|
-        params = EttAPI.fetch_player(id)
         begin
-          PlayerRepository.new.create(params)
+          PlayerPersistor.new.call(id)
         rescue Hanami::Model::UniqueConstraintViolationError => e
           puts 'already exists'
         end
@@ -20,13 +19,12 @@ namespace :seed do
   task :bonsai, [:environment] do
     require_relative '../config/boot'
     require_relative '../lib/ett_api'
+
     require 'csv'
+
     CSV
       .parse(File.read('./rakelib/seed/bonsaisliste.csv'))
-      .map do |_, id, _, _, _|
-        params = EttAPI.fetch_player(id)
-        PlayerRepository.new.create(params)
-      end
+      .map { |_, id, _, _, _| PlayerPersistor.new.call(id) }
   end
 
   task :clear_leagues, [:environment] do
@@ -50,14 +48,14 @@ namespace :seed do
     require_relative '../lib/challonge'
     require 'csv'
 
-    short_csv =
-      File.read('./rakelib/seed/FBLigen.csv').force_encoding('ISO-8859-1')
-        .encode('UTF-8').split("\n").map do |line|
-        line.split(';')[0..1].join(';')
-      end.join("\n")
+    utf8_file =
+      File
+        .read('./rakelib/seed/FBLigen.csv')
+        .force_encoding('ISO-8859-1')
+        .encode('UTF-8')
 
     league_players_csv =
-      CSV.parse(short_csv, headers: true, col_sep: ';').map(&:to_h)
+      CSV.parse(utf8_file, headers: true, col_sep: ';').map(&:to_h)
 
     CSV
       .parse(File.read('./rakelib/seed/Ligen.csv'), headers: true, col_sep: ';')

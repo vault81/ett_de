@@ -23,7 +23,7 @@ class RefreshPlayers
       new.run
     rescue StandardError => e
       log_error(e)
-      sleep 300
+      sleep 120
       run
     end
 
@@ -51,8 +51,8 @@ class RefreshPlayers
         attrs = build_match(player.ett_id)
         MatchInfoRepository.new.update_or_create(player.id, test: attrs)
       end
-      puts 'Sleeping 15 secs'
-      sleep 15
+      puts 'Sleeping 10 secs'
+      sleep 6
     end
   end
 

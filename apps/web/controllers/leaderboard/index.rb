@@ -9,6 +9,7 @@ module Web
 
         params Class.new(Hanami::Action::Params) {
                  predicate(:validorder, message: 'is not cool') do |current|
+                   break false unless current.is_a?(Array)
                    current.any? do |c|
                      %w[
                        ett_elo
@@ -37,18 +38,20 @@ module Web
 
         def ordered_players
           return league_ordered_players if params[:order]&.include?('league')
-          order = params[:order]&.map { |p| p.to_sym }
-          order << :ett_elo unless order.nil?
+          order = params[:order]&.map { |p| p.to_sym } || []
+          order << :ett_elo
 
-          PlayerRepository.new.all_in_order(order || [:ett_elo])
+          reverse = !params[:order]&.include?('ett_status')
+
+          PlayerRepository.new.all_with_league(order: order, reverse: reverse)
         end
 
         def league_ordered_players
-          players = PlayerRepository.new.all_with_tournaments
+          players = PlayerRepository.new.all_with_league
 
           players.sort_by do |player|
             [
-              player.tournaments.first&.rank || 999_999_999,
+              player.league&.rank || 999_999_999,
               -player.ett_elo.to_i,
               player.ett_name
             ]

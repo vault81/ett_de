@@ -1,62 +1,19 @@
 require 'bundler/setup'
-require 'appsignal' # Load AppSignal
 require 'hanami/setup'
 require 'hanami/model'
 
-require_relative '../lib/ett_de'
-require_relative '../apps/web/application'
+require_relative './appsignal'
 require_relative './sidekiq'
+
+require_relative '../apps/web/application'
+
+require 'ett_de'
+require 'ett_de/middlewares/appsignal_url_rack'
 require 'pg'
 require 'pry'
 
-Appsignal.config =
-  Appsignal::Config.new(
-    Hanami.root,
-    p(Hanami.env),
-    name: 'ett_de' # Optional configuration hash
-  )
-
-p Appsignal.start # Start the AppSignal integration
-Appsignal.start_logger # Start logger
-
-class AppsignalURL
-  def initialize(app, options = {})
-    @app = app
-    @options = options
-  end
-
-  def call(env)
-    url = Rack::Request.new(env).url
-    path = URI.parse(url).path
-    env['appsignal.route'] =
-      if path.start_with?('/assets')
-        '/assets'
-      elsif path.start_with?('/players')
-        res(path, 'players')
-      elsif path.start_with?('/tournaments')
-        res(path, 'tournaments')
-      else
-        path
-      end
-
-    @app.call(env)
-  end
-
-  private
-
-  def res(path, name)
-    if path.end_with?(name)
-      "/#{name}"
-    elsif path.end_with?('new')
-      "/#{name}/new"
-    else
-      "/#{name}/:id"
-    end
-  end
-end
-
 Hanami.configure do
-  middleware.use AppsignalURL
+  middleware.use AppsignalURLRack
   middleware.use Appsignal::Rack::GenericInstrumentation
   mount Web::Application, at: '/'
 
