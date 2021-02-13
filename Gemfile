@@ -33,7 +33,6 @@ end
 group :test do
   gem 'capybara'
   gem 'rspec'
-  gem 'sqlite3'
 end
 
 group :production do
