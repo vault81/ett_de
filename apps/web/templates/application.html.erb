@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="refresh" content="10" />
 
-    <%= stylesheet 'bootstrap.min' %>
+    <%= stylesheet 'bootstrap.min' unless ENV['HANAMI_ENV'] == 'production' %>
     <link href="https://vlt81.de/assets/bootstrap.min.css" rel="stylesheet">
   </head>
 
   <body class="bg-light">
-    <%= javascript 'bootstrap.bundle.min' %>
+    <%= javascript 'bootstrap.bundle.min' unless ENV['HANAMI_ENV'] == 'production' %>
     <script src="https://vlt81.de/assets/bootstrap.min.js"></script>
 
     <div class="container-fluid bg-light">
