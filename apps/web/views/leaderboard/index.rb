@@ -3,6 +3,15 @@ module Web
     module Leaderboard
       class Index
         include Web::View
+        def invert_key(key, query_hash)
+          query_hash = query_hash.dup
+          if query_hash[key].nil?
+            query_hash.merge!(key => '1')
+          else
+            query_hash.delete(key)
+          end
+          query_hash
+        end
 
         def invert_refresh(query_hash)
           query_hash = query_hash.dup
