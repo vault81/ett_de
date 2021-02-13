@@ -1,7 +1,7 @@
 <% query_hash = params.env['rack.request.query_hash'] %>
 
 <div>
-  <div class="card" style="padding: 2rem;margin: 2rem;<%= query_hash['compact'] ? 'font-size: 0.6rem;' : '' %>">
+    <div class="card" style="padding: 2rem;margin: 2rem;<%= query_hash['compact'] ? 'font-size: 0.6rem;' : '' %>">
         <div class="d-flex flex-row-reverse">
             <a href="<%= res_link(query_hash['order']&.first, invert_refresh(query_hash)) %>" class="btn rounded-pill btn-secondary">
 
