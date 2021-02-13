@@ -5,11 +5,11 @@ module Web
     module Players
       class Create
         include Web::Action
-        handle_exception Hanami::Model::UniqueConstraintViolationError => :handle_duplicate_error
+        handle_exception Hanami::Model::UniqueConstraintViolationError =>
+                           :handle_duplicate_error
 
         def call(params)
-          params = EttAPI.fetch_player(params[:player][:ett_id_or_name])
-          PlayerRepository.new.create(params)
+          PlayerPersistor.new.call(params[:ett_id_or_name])
 
           redirect_to '/leaderboard'
         end
