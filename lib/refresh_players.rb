@@ -52,7 +52,7 @@ class RefreshPlayers
         MatchInfoRepository.new.update_or_create(player.id, test: attrs)
       end
       puts 'Sleeping 10 secs'
-      sleep 10
+      sleep 6
     end
   end
 
