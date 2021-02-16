@@ -136,11 +136,16 @@ class RefreshPlayers
     rounds = build_rounds(match)
 
     {
+      match_ranked: match[:Ranked],
       player_state: match[:HomePlayer][:Id] == id.to_s ? 'home' : 'away',
       home_player_id: match[:HomePlayer][:Id],
       home_player_name: match[:HomePlayer][:UserName],
+      home_player_platform: match[:HomePlayer][:Platform],
+      home_player_device: match[:HomePlayer][:Device],
       away_player_id: match[:AwayPlayer][:Id],
       away_player_name: match[:AwayPlayer][:UserName],
+      away_player_device: match[:AwayPlayer][:Device],
+      away_player_platform: match[:AwayPlayer][:Platform],
       rounds_count: match[:Rounds].count,
       rounds: rounds
     }
