@@ -27,7 +27,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <% unless query_hash['auto_refresh'].nil? %>
-    <meta http-equiv="refresh" content="10" />
+    <meta http-equiv="refresh" content="5" />
     <% end %>
 
     <%= stylesheet 'bootstrap.min' unless ENV['HANAMI_ENV'] == 'production' %>

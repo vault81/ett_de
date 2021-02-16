@@ -3,9 +3,6 @@
 <div>
     <div class="card" style="padding: 1rem;margin: 1rem;<%= query_hash['compact'] ? 'font-size: 0.6rem;' : '' %>">
 
-      <h1 class="h1">
-        🏓 Rangliste
-      </h1>
       <div class="d-flex flex-row-reverse" style="margin: 0.5rem;">
             <a href="<%= res_link(query_hash['order']&.first, invert_refresh(query_hash)) %>" class="btn rounded-pill btn-secondary">
 
@@ -34,6 +31,10 @@
               <% end %>
             </a>
         </div>
+
+        <h1 class="h1">
+          🏓 Rangliste
+        </h1>
 
         <% if players.any? %>
           <div>
@@ -105,11 +106,6 @@
                                 </span> vs. <span class="badge rounded-pill <%=f[1] %>">
                                     <%= match_info[:away_player_name]%>
                                 </span>
-                                <!-- <p> -->
-                                <button class="btn-small small rounded-pill btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=i %>">
-                                    📡
-                                </button>
-                                <!-- </p> -->
                                 <div class="collapse <%= query_hash['extend_match_info'] ? 'show' : '' %>" id="collapse<%=i %>">
                                     <!-- <div class="card card-body"> -->
                                     <% match_info[:rounds].map.with_index do |round, i| %>
@@ -121,7 +117,6 @@
                                         <%= round[:AwayScore] %>
                                     </div>
                                     <% end %>
-                                    <!-- </div> -->
                                 </div>
                             </div>
                             <% else %>

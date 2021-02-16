@@ -1,24 +1,82 @@
-<div class="container">
-  <div>
-    <div>
-      <div class="card position-absolute top-50 start-50 translate-middle" style="width: 24rem;">
-        <!-- <img src="..." class="card-img-top" alt="..."> -->
-        <div class="card-body">
-          <h5 class="card-title">Spielerübersicht</h5>
-          <br/>
-          <div class="card-text">
-            <table class="table table-hover table-striped">
-              <% player.to_h.slice(:ett_id, :ett_name, :ett_wins, :ett_losses, :ett_elo, :ett_status, :ett_last_online).each do |k,v| %>
-                <tr>
-                  <th><%= titleize(k.to_s.split("ett_").join('')) %></th>
-                  <th><%= v.to_s %></th>
-                </tr>
-              <% end %>
-            </table>
-          </div>
-          <a href="/leaderboard" class="btn btn-secondary">Back to leaderboard</a>
-        </div>
+<% query_hash = params.env['rack.request.query_hash'] %>
+<div class="d-flex justify-content-center">
+    <div class="card" style="margin-top: 1rem;width: 26rem;">
+      <div class="d-flex flex-row-reverse" style="margin: 0.5rem;">
+      <a href="<%= res_link(invert_key('auto_refresh', query_hash)) %>" class="btn rounded-pill btn-secondary">
+
+        <% if query_hash['auto_refresh'].nil? %>
+          🔄❌
+        <% else %>
+          🔄✔️
+        <% end %>
+
+      </a>
       </div>
+
+        <!-- <img src="..." class="card-img-top" alt="..."> -->
+      <div class="card-body">
+            <h3 class="card-title">Spielerübersicht</h3>
+            <br />
+
+            <h4 class="card-title">Allgemein</h5>
+            <div class="card-text">
+                <table class="table table-hover table-striped">
+                    <% player.to_h.slice(:ett_id, :ett_name, :ett_wins, :ett_losses, :ett_elo, :ett_status, :ett_last_online).each do |k,v| %>
+                    <tr>
+                        <th><%= titleize(k.to_s.split("ett_").join('')) %></th>
+                        <th><%= v.to_s %></th>
+                    </tr>
+                    <% end %>
+                </table>
+            </div>
+
+            <h4 class="card-title">Live Match</h4>
+
+
+            <% match_info = player.match_info&.test&.deep_symbolize %>
+            <% if match_info && match_info[:rounds] %>
+
+            <div class="d-flex justify-content-center h5" style="margin: 1rem;">
+                <%  f = format_matchup(match_info) %>
+                <span class="badge rounded-pill <%=f[0] %>">
+                    <%= match_info[:home_player_name]%>
+                </span>
+                <div style="padding-left: 0.5rem;padding-right: 0.5rem;">
+                    vs.
+                </div>
+                <span class="badge rounded-pill <%=f[1] %>">
+                    <%= match_info[:away_player_name]%>
+                </span>
+                <br />
+            </div>
+
+            <div class="d-flex justify-content-center h5">
+                <% match_info[:rounds].map.with_index do |round, i| %>
+                <%  f = format_round(round) %>
+                <%= i == 0 ? '' : ',' %>
+                <div class="badge <%= f[:left_cl] %>">
+                    <%= round[:HomeScore] %>
+                </div>
+                <div style="padding-left: 1.5rem;padding-right: 1.5rem;">
+                    -
+                </div>
+                <div class="badge <%= f[:right_cl]%>">
+                    <%= round[:AwayScore] %>
+                </div>
+            </div>
+            <% end %>
+            <br />
+
+            <% else %>
+            <div class="d-flex justify-content-center">
+              <div class="badge bg-secondary" style="margin: 1rem;">
+                No Match ongoing
+              </div>
+            </div>
+
+            <% end %>
+
+            <a href="/leaderboard" class="btn btn-secondary">Back to leaderboard</a>
+        </div>
     </div>
-  </div>
 </div>
