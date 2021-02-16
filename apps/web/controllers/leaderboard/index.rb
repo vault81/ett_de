@@ -5,7 +5,6 @@ module Web
         include Web::Action
 
         expose :players
-        expose :match_infos
 
         params Class.new(Hanami::Action::Params) {
                  predicate(:validorder, message: 'is not cool') do |current|
@@ -28,7 +27,6 @@ module Web
         def call(params)
           if params.valid?
             @players = ordered_players
-            @match_infos = MatchInfoRepository.new.all
           else
             redirect_to '/leaderboard'
           end

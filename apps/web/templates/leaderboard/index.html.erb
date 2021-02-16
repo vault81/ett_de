@@ -94,9 +94,9 @@
                         <% unless query_hash['compact'] %>
                         <th>
                             <%= player.ett_last_online.nil? ? 'x' : format_time((Time.now - player.ett_last_online).to_i) %></th>
-                        <% match_info = match_infos.find {|i| i.player_id == player.id }&.test&.deep_symbolize %>
                         <% end %>
                         <th>
+                            <% match_info = player.match_info&.test.deep_symbolize %>
                             <% if match_info&.has_key?(:rounds) %>
                             <div>
 
