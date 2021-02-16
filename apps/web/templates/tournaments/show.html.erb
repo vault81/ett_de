@@ -17,7 +17,17 @@
             <th><%= titleize(k.to_s) %></th>
             <th><%= v.to_s %></th>
           </tr>
+
         <% end %>
+
+        <tr>
+          <th> Challonge Ranking Tabelle </th>
+          <th>
+            <a class="link-dark" href="https://www.challonge.com/<%= tournament.challonge_url %>/standings">
+              click
+            </a>
+          </th>
+        </tr>
       </table>
 
       <br />
@@ -45,6 +55,7 @@
               </th>
             <% end %>
           </tr>
+
         <% end %>
       </table>
 
