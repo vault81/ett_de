@@ -2,7 +2,8 @@
 <% query_hash = params.env['rack.request.query_hash'] %>
 
 <html lang="en">
-  <head>
+
+<head>
     <title>ETT DE Leaderboard</title>
 
     <!-- Favicons -->
@@ -26,19 +27,48 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <% unless query_hash['auto_refresh'].nil? %>
-      <meta http-equiv="refresh" content="10" />
+    <meta http-equiv="refresh" content="10" />
     <% end %>
 
     <%= stylesheet 'bootstrap.min' unless ENV['HANAMI_ENV'] == 'production' %>
     <link href="https://vlt81.de/assets/bootstrap.min.css" rel="stylesheet">
-  </head>
+</head>
 
-  <body class="bg-light">
+<body class="bg-light">
     <%= javascript 'bootstrap.bundle.min' unless ENV['HANAMI_ENV'] == 'production' %>
     <script src="https://vlt81.de/assets/bootstrap.min.js"></script>
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img src="https://www.vlt81.de/ett/logo-raw.svg" alt="" width="30" height="24">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                  <li class="nav-item">
+                  </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/leaderboard">Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Turniere (Coming Soon)</a>
+                    </li>
+                </ul>
+                <!-- <form class="d-flex">
+                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                     <button class="btn btn-outline-success" type="submit">Search</button>
+                     </form> -->
+            </div>
+        </div>
+    </nav>
+
     <div class="container-fluid bg-light">
-      <%= yield %>
+        <%= yield %>
     </div>
-  </body>
+</body>
+
 </html>
