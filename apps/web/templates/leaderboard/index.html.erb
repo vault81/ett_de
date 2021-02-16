@@ -110,7 +110,7 @@
                                     📡
                                 </button>
                                 <!-- </p> -->
-                                <div class="collapse" id="collapse<%=i %> <%= query_hash['extend_match_info'] ? 'show' : '' %>">
+                                <div class="collapse <%= query_hash['extend_match_info'] ? 'show' : '' %>" id="collapse<%=i %>">
                                     <!-- <div class="card card-body"> -->
                                     <% match_info[:rounds].map.with_index do |round, i| %>
                                     <%  f = format_round(round) %>
