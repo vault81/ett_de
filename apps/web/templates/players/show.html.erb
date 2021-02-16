@@ -36,13 +36,13 @@
             <% match_info = player.match_info&.test&.deep_symbolize %>
             <% if match_info && match_info[:rounds] %>
 
-            <div class="d-flex justify-content-center h5" style="margin: 1rem;">
+            <div class="d-flex justify-content-evenly h5" style="margin: 1rem;">
                 <%  f = format_matchup(match_info) %>
                 <span class="badge rounded-pill <%=f[0] %>">
                     <%= match_info[:home_player_name]%>
                 </span>
-                <div style="padding-left: 0.5rem;padding-right: 0.5rem;">
-                    vs.
+                <div>
+                  vs.
                 </div>
                 <span class="badge rounded-pill <%=f[1] %>">
                     <%= match_info[:away_player_name]%>
@@ -50,21 +50,22 @@
                 <br />
             </div>
 
-            <div class="d-flex justify-content-center h5">
-                <% match_info[:rounds].map.with_index do |round, i| %>
+            <div class="h5">
+              <% match_info[:rounds].map do |round| %>
+              <div class="d-flex justify-content-evenly" style="padding: 0.5rem;">
                 <%  f = format_round(round) %>
-                <%= i == 0 ? '' : ',' %>
-                <div class="badge <%= f[:left_cl] %>">
+                <div class="badge <%= f[:left_cl] %> ">
                     <%= round[:HomeScore] %>
                 </div>
-                <div style="padding-left: 1.5rem;padding-right: 1.5rem;">
+                <div>
                     -
                 </div>
                 <div class="badge <%= f[:right_cl]%>">
                     <%= round[:AwayScore] %>
                 </div>
+              </div>
+                <% end %>
             </div>
-            <% end %>
             <br />
 
             <% else %>
