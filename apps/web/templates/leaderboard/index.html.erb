@@ -25,7 +25,14 @@
                 <% end %>
             </a>
 
+            <a href="<%= res_link(query_hash['order']&.first, invert_key('extend_match_info', query_hash)) %>" class="btn rounded-pill btn-secondary">
 
+              <% if query_hash['extend_match_info'].nil? %>
+                📡❌
+              <% else %>
+                📡✔
+              <% end %>
+            </a>
         </div>
 
         <% if players.any? %>
@@ -103,7 +110,7 @@
                                     📡
                                 </button>
                                 <!-- </p> -->
-                                <div class="collapse" id="collapse<%=i %>">
+                                <div class="collapse" id="collapse<%=i %> <%= query_hash['extend_match_info'] ? 'show' : '' %>">
                                     <!-- <div class="card card-body"> -->
                                     <% match_info[:rounds].map.with_index do |round, i| %>
                                     <%  f = format_round(round) %>
