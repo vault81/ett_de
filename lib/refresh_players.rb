@@ -5,27 +5,27 @@ require 'challonge'
 class RefreshPlayers
   class << self
     def run_challonge
-      new.run_challonge
-    rescue StandardError => e
-      log_error(e)
-      sleep 120
-      run_challonge
+      monitor(:challonge) { new.run_challonge }
     end
 
     def run_log
-      new.run_log
-    rescue StandardError => e
-      log_error(e)
-      sleep 120
-      run_log
+      monitor(:log) { new.run_log }
     end
 
     def run
-      new.run
-    rescue StandardError => e
-      log_error(e)
-      sleep 120
-      run
+      monitor { new.run }
+    end
+
+    private
+
+    def monitor(name = 'default', &block)
+      begin
+        Appsignal.instrument("worker.#{name}") { yield }
+      rescue StandardError => e
+        log_error(e)
+        sleep 60
+        monitor(&block)
+      end
     end
 
     def log_error(e)
@@ -54,7 +54,7 @@ class RefreshPlayers
         attrs = build_match(player.ett_id)
         MatchInfoRepository.new.update_or_create(player.id, test: attrs)
       end
-      puts 'Sleeping 10 secs'
+      puts 'Sleeping 6 secs'
       sleep 6
     end
   end

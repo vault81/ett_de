@@ -96,7 +96,7 @@
                             <%= player.ett_last_online.nil? ? 'x' : format_time((Time.now - player.ett_last_online).to_i) %></th>
                         <% end %>
                         <th>
-                            <% match_info = player.match_info&.test.deep_symbolize %>
+                            <% match_info = player.match_info&.test&.deep_symbolize %>
                             <% if match_info&.has_key?(:rounds) %>
                             <div>
 
