@@ -16,6 +16,7 @@ class AppsignalURLRack
   rescue StandardError => e
     puts e.inspect
     Appsignal.set_error(e)
+    raise e
   end
 
   private
