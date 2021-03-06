@@ -1,3 +1,4 @@
+require 'appsignal'
 require 'ett_api'
 require 'challonge'
 
@@ -30,6 +31,8 @@ class RefreshPlayers
     def log_error(e)
       puts "Error: #{e}"
       puts "Backtrace: #{e.backtrace.join("\n")}"
+
+      Appsignal.set_error(e)
     end
   end
 
