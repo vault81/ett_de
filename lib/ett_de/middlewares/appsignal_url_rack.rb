@@ -13,6 +13,9 @@ class AppsignalURLRack
     env['appsignal.route'] = "#{req.request_method} #{res_path(req)}"
 
     @app.call(env)
+  rescue StandardError => e
+    puts e.inspect
+    Appsignal.set_error(e)
   end
 
   private
