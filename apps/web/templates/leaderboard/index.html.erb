@@ -1,5 +1,4 @@
 <% query_hash = params.env['rack.request.query_hash'] %>
-
 <div>
     <div class="card" style="padding: 1rem;margin: 1rem;<%= query_hash['compact'] ? 'font-size: 0.6rem;' : '' %>">
 
@@ -99,7 +98,6 @@
                             <% match_info = player.match_info&.test&.deep_symbolize %>
                             <% if match_info&.has_key?(:rounds) %>
                             <div>
-
                                 <%  f = format_matchup(match_info) %>
                                 <span class="badge rounded-pill <%=f[0] %>">
                                     <%= match_info[:home_player_name]%>
@@ -118,6 +116,9 @@
                                     </div>
                                     <% end %>
                                 </div>
+                                <% if match_info[:match_state] == 'ongoing' %>
+                                  🔴
+                                <% end %>
                             </div>
                             <% else %>
                             Empty

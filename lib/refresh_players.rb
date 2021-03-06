@@ -5,22 +5,46 @@ require 'challonge'
 class RefreshPlayers
   class << self
     def run_challonge
-      monitor(:challonge) { new.run_challonge }
+      monitor(:challonge) do
+        new.run_challonge
+
+        puts 'Sleeping 6 secs'
+        sleep 6
+      end
     end
 
     def run_log
-      monitor(:log) { new.run_log }
+      monitor(:log) do
+        new.run_log
+
+        puts 'Sleeping 6 secs'
+        sleep 6
+      end
+    end
+
+    def run_matches
+      monitor(:matches) do
+        new.run_matches
+
+        puts 'Sleeping 6 secs'
+        sleep 6
+      end
     end
 
     def run
-      monitor { new.run }
+      monitor(:players) do
+        new.run
+
+        puts 'Sleeping 30 secs'
+        sleep 30
+      end
     end
 
     private
 
     def monitor(name = 'default', &block)
       begin
-        Appsignal.instrument("worker.#{name}") { yield }
+        loop { Appsignal.instrument("worker.#{name}") { yield } }
       rescue StandardError => e
         log_error(e)
         sleep 60
@@ -40,43 +64,43 @@ class RefreshPlayers
     @log = {}
   end
 
-  def run_log
-    loop do
-      @log = LogCollectorAPI.fetch_log
-      puts 'Refreshing all player loges....'
-      repo.all.map do |player|
-        puts player
+  def run_matches
+    repo.all.map do |player|
+      Thread.new do
+        attrs = EttAPI.fetch_matches(player.ett_id)
 
-        attrs = { ett_status: build_log_for_player(player.ett_id) }
-        puts attrs
-        repo.update(player.id, attrs)
-
-        attrs = build_match(player.ett_id)
         MatchInfoRepository.new.update_or_create(player.id, test: attrs)
       end
-      puts 'Sleeping 6 secs'
-      sleep 6
+    end.map do |thr|
+      thr.join
+      sleep 0.1
+    end
+  end
+
+  def run_log
+    self.log = LogCollectorAPI.fetch_log
+    puts 'Refreshing all player loges....'
+    repo.all.map do |player|
+      puts player
+
+      attrs = { ett_status: build_log_for_player(player.ett_id) }
+      puts attrs
+      repo.update(player.id, attrs)
+
+      attrs = build_match(player.ett_id)
+      next if attrs.nil?
+      MatchInfoRepository.new.update_or_create(player.id, test: attrs)
     end
   end
 
   def run
-    loop do
-      puts 'Refreshing all players....'
+    puts 'Refreshing all players....'
 
-      @log = LogCollectorAPI.fetch_log
-      repo.all.map do |player|
-        puts player
+    repo.all.map do |player|
+      attrs = EttAPI.fetch_player(player.ett_id)
 
-        attrs = EttAPI.fetch_player(player.ett_id)
-        attrs = attrs.merge(ett_status: build_log_for_player(player.ett_id))
-        puts attrs
-
-        repo.update(player.id, attrs)
-        sleep 1
-      end
-      puts 'Sleeping 5 minutes'
-
-      sleep 60 * 5
+      repo.update(player.id, attrs)
+      sleep 1
     end
   end
 
@@ -95,7 +119,7 @@ class RefreshPlayers
 
   private
 
-  attr_reader :log
+  attr_accessor :log
 
   def persist_tournament(resp)
     TournamentRepository.new.update_or_create(
@@ -134,12 +158,13 @@ class RefreshPlayers
   # rubocop:disable Metrics/MethodLength
   def build_match(id)
     match = find_match(id)
-    return {} if match.nil?
+    return nil if match.nil?
 
     rounds = build_rounds(match)
 
     {
       match_ranked: match[:Ranked],
+      match_state: 'ongoing',
       player_state: match[:HomePlayer][:Id] == id.to_s ? 'home' : 'away',
       home_player_id: match[:HomePlayer][:Id],
       home_player_name: match[:HomePlayer][:UserName],

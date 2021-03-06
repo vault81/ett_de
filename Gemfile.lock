@@ -85,6 +85,8 @@ GEM
       multipart-post (>= 1.2, < 3)
       ruby2_keywords
     faraday-net_http (1.0.1)
+    faraday_middleware (1.0.0)
+      faraday (~> 1.0)
     hanami (1.3.3)
       bundler (>= 1.6, < 3)
       concurrent-ruby (~> 1.0)
@@ -233,6 +235,9 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    simple_jsonapi_client (0.2.5)
+      faraday (>= 0.12, < 2.0)
+      faraday_middleware (> 0.11, < 2.0)
     solargraph (0.40.3)
       backport (~> 1.1)
       benchmark
@@ -267,6 +272,7 @@ DEPENDENCIES
   capybara
   dotenv (~> 2.4)
   faraday
+  faraday_middleware
   hanami (~> 1.3)
   hanami-model!
   hanami-webconsole
@@ -282,10 +288,11 @@ DEPENDENCIES
   sequel_pg
   shotgun
   sidekiq
+  simple_jsonapi_client
   solargraph
   typespec
   warning
   yard
 
 BUNDLED WITH
-   2.2.9
+   2.2.13

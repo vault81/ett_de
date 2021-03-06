@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'appsignal'
 gem 'dotenv', '~> 2.4'
 gem 'faraday'
+gem 'faraday_middleware'
 gem 'hanami', '~> 1.3'
 
 # gem 'hanami-model', '~> 1.3'
@@ -13,6 +14,7 @@ gem 'sequel'
 gem 'sequel_pg', require: false
 gem 'sidekiq'
 gem 'warning'
+gem 'simple_jsonapi_client'
 
 group :development do
   # Code reloading
