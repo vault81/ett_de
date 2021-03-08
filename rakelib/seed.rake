@@ -50,9 +50,7 @@ namespace :seed do
 
     utf8_file =
       File
-        .read('./rakelib/seed/FBLigen.csv')
-        .force_encoding('ISO-8859-1')
-        .encode('UTF-8')
+        .read('./rakelib/seed/FBLigen2.utf8.csv')
 
     league_players_csv =
       CSV.parse(utf8_file, headers: true, col_sep: ';').map(&:to_h)
