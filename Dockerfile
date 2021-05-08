@@ -1,6 +1,4 @@
-ARG RUBY_VERSION=2.7.2-jemalloc
-FROM quay.io/evl.ms/fullstaq-ruby:2.7.2-jemalloc-slim
-RUN gem install bundler
+FROM ruby:2.7.3-buster
 
 RUN apt-get update && apt-get upgrade -y \
   && mkdir -p /usr/share/man/man1 \
