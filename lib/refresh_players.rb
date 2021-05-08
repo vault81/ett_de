@@ -1,35 +1,38 @@
+require 'appsignal'
 require 'ett_api'
 require 'challonge'
 
 class RefreshPlayers
   class << self
     def run_challonge
-      new.run_challonge
-    rescue StandardError => e
-      log_error(e)
-      sleep 120
-      run_challonge
+      monitor(:challonge) { new.run_challonge }
     end
 
     def run_log
-      new.run_log
-    rescue StandardError => e
-      log_error(e)
-      sleep 120
-      run_log
+      monitor(:log) { new.run_log }
     end
 
     def run
-      new.run
-    rescue StandardError => e
-      log_error(e)
-      sleep 120
-      run
+      monitor { new.run }
+    end
+
+    private
+
+    def monitor(name = 'default', &block)
+      begin
+        Appsignal.instrument("worker.#{name}") { yield }
+      rescue StandardError => e
+        log_error(e)
+        sleep 60
+        monitor(&block)
+      end
     end
 
     def log_error(e)
       puts "Error: #{e}"
       puts "Backtrace: #{e.backtrace.join("\n")}"
+
+      Appsignal.set_error(e)
     end
   end
 
@@ -51,7 +54,7 @@ class RefreshPlayers
         attrs = build_match(player.ett_id)
         MatchInfoRepository.new.update_or_create(player.id, test: attrs)
       end
-      puts 'Sleeping 10 secs'
+      puts 'Sleeping 6 secs'
       sleep 6
     end
   end
@@ -136,11 +139,16 @@ class RefreshPlayers
     rounds = build_rounds(match)
 
     {
+      match_ranked: match[:Ranked],
       player_state: match[:HomePlayer][:Id] == id.to_s ? 'home' : 'away',
       home_player_id: match[:HomePlayer][:Id],
       home_player_name: match[:HomePlayer][:UserName],
+      home_player_platform: match[:HomePlayer][:Platform],
+      home_player_device: match[:HomePlayer][:Device],
       away_player_id: match[:AwayPlayer][:Id],
       away_player_name: match[:AwayPlayer][:UserName],
+      away_player_device: match[:AwayPlayer][:Device],
+      away_player_platform: match[:AwayPlayer][:Platform],
       rounds_count: match[:Rounds].count,
       rounds: rounds
     }

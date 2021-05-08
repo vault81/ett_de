@@ -11,7 +11,7 @@ class PlayerRepository < Hanami::Repository
   end
 
   def all_with_league(order: nil, reverse: nil)
-    query = self.aggregate(:tournaments)
+    query = self.aggregate(:tournaments, :match_info)
     query = query.order(order) if order
     query = query.reverse if reverse
 
