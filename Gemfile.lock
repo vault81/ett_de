@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/hanami/model.git
-  revision: 1fb18741c3c36a2db8d4269a385b99b7e9b16cf3
+  revision: cdcfb79ebfd9d2fdfd7115fc2e824d2299fcc01b
   specs:
     hanami-model (1.3.2)
       bigdecimal (~> 1.4)
@@ -17,7 +17,7 @@ GEM
   specs:
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    appsignal (2.11.8)
+    appsignal (3.0.3)
       rack
     ast (2.4.2)
     backport (1.1.2)
@@ -43,7 +43,7 @@ GEM
     debug_inspector (1.0.0)
     diff-lcs (1.4.4)
     dotenv (2.7.6)
-    dry-configurable (0.12.0)
+    dry-configurable (0.12.1)
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.5, >= 0.5.0)
     dry-container (0.7.2)
@@ -80,11 +80,15 @@ GEM
       dry-types (~> 0.11.0)
     e2mmap (0.1.0)
     erubi (1.10.0)
-    faraday (1.3.0)
+    faraday (1.4.1)
+      faraday-excon (~> 1.1)
       faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.1)
       multipart-post (>= 1.2, < 3)
-      ruby2_keywords
+      ruby2_keywords (>= 0.0.4)
+    faraday-excon (1.1.0)
     faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.1.0)
     hanami (1.3.3)
       bundler (>= 1.6, < 3)
       concurrent-ruby (~> 1.0)
@@ -146,11 +150,11 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
     multipart-post (2.1.1)
-    nio4r (2.5.5)
+    nio4r (2.5.7)
     nokogiri (1.11.1)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
-    oj (3.11.2)
+    oj (3.11.5)
     parallel (1.20.1)
     parser (3.0.1.1)
       ast (~> 2.4.1)
@@ -159,7 +163,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (4.0.6)
-    puma (5.2.1)
+    puma (5.3.0)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
@@ -233,7 +237,7 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
-    solargraph (0.40.3)
+    solargraph (0.40.4)
       backport (~> 1.1)
       benchmark
       bundler (>= 1.17.2)
