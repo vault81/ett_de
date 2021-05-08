@@ -1,67 +1,85 @@
-ID;Einteilung;Elo;ETTname;FB Name
-61793;A;2476;semmel_a(ger);Spike Spieler
-341;A;2396;andi.tri;Andi Tri
-122515;A;2372;Fischerq;Patrick Rott
-5606;A;2240;ceekay1109;Caspar Koestler
-4278;A;2240;Volkman51(GER);Homer Hompson
-36316;A;2184;djbeatzpm(ger);Marc Meier
-33296;A;2096;sung.globetrot;Sung Globetrotter
-395;A;2053;Dietrich_Muenchen;Dietrich Jahn
-6840;A;1888;Det-vom-Dorf;Detlev Stemberg
-2668;A;1783;Katy.S71(GER);Katrin Semmelhaack
-91638;B;2360;Rita.Gal.411;Gál Rita
-77002;B;2246;wabble8;Alexander Hank
-61237;B;2001;PIUSTIG;Peter Lustig
-111032;B;1977;johannesjo;Johannes Millan
-1722;B;1868;tobsnet(GER);Tobi Mai
-107;B;1802;marcmoni(ger);Ralf Cebulski
-280;B;1792;gerald(aut);Gerald Berthold
-178533;B;1726;Levelsurfer;Martin Gdr
-13554;B;1581;Mandek;Michael Klemme
-2190;B;1580;VRdevil(GER);Simon Niggemeyer
-283;C;2108;Roonny78;Ronny Otterbach
-188985;C;1746;Timonst3r;Timon Ster
-41925;C;1744;Warboo73;Bjoern Heussner
-200672;C;1671;luschenkiller;Tristan Druyen
-50629;C;1658;nightstalk3rx;Luca Koralewski
-256776;C;1656;krueni;Daniel Lohni 
-45477;C;1545;DonDemon;Alexander Ihrig
-92483;C;1500;ado;Ado Becher
-5436;C;1500;Fanisaja_Ge_En;Jan Droste
-266231;C;1456;Grayson;Michael Peña
-52;D;2311;derlux;Torben Glissmann
-257289;D;1746;Dracoste;Lars Kaplanski
-147699;D;1696;BECKS68;Dennis Bepunkt
-186683;D;1610;Who_Man;Peter Löber
-216742;D;1600;Partyarti777;Artur Moser
-152271;D;1585;LostUnki.aut;Martin Aloisson
-31374;D;1557;Indogermanican;Akilnathan X. Logeswaran
-278230;D;1550;Nascituruz;Tim Gaudian
-264579;D;1539;beckmich;Michael Beckelmann
-42189;D;1504;buxi2010;Gerd König
-116344;PRO-1;3074;Aiphaton;Maik Reusner
-30974;PRO-1;2829;schlumpfhh-ger;Marco Voigt
-11002;PRO-1;2802;twISTer1979;Ingo Steinhorst
-4410;PRO-1;2789;wurstfriedl;Karsten Paul
-21505;PRO-1;2742;Feintlong;Dennis Dennis
-102686;PRO-1;2718;Cendaru;Stefan Biretto
-40032;PRO-1;2710;Crisrock61;Christian Wa
-129470;PRO-1;2666;MisterDeal;Yannick Fuchs
-48705;PRO-1;2652;0rch1;Florian Kemper
-149868;PRO-1;2599;kittel;Karsten Kittel
-51978;PRO-1;2598;Franz;Franz Lätzer
-262;PRO-1;2591;bonsaizocker;Tony Dang
-17997;PRO-1;2359;Atmonix;Masoud Zandieh
-93111;PRO-2;2580;CptnDeutschlnd;Daniel Koch
-758;PRO-2;2573;peter.r_ger;Peter Ger
-16615;PRO-2;2441;Frankie69;Frankie Hastdunichtgesehen
-42233;PRO-2;2434;incentive;Sascha Herr
-178509;PRO-2;2424;MadViolinist;Lüder Hoppe
-96720;PRO-2;2344;SamuReiGer;Thomas Reiger
-185894;PRO-2;2320;DominicSchmidt29;Dominic Schmidt
-86511;PRO-2;2238;Nolte;Nick Zeltner
-124792;PRO-2;2183;r4upe;Jenny Stefan
-269626;PRO-2;2117;Fred666v2;Manfred Dichtl
-89164;PRO-2;2092;OliN72ger;Oliver Nölle
-163993;PRO-2;2039;RELOAD1976;Michael Widder
-160095;PRO-2;2035;T-Bone-1895;Thomas Bone
+ID;Einteilung
+315909;PRO-1
+11002;PRO-1
+102686;PRO-1
+21505;PRO-1
+40032;PRO-1
+4410;PRO-1
+129470;PRO-1
+48705;PRO-1
+51978;PRO-1
+93111;PRO-1
+758;PRO-1
+185894;PRO-1
+149868;PRO-1
+257146;PRO-1
+178509;PRO-2
+42233;PRO-2
+124792;PRO-2
+86511;PRO-2
+96720;PRO-2
+122515;PRO-2
+61793;PRO-2
+17997;PRO-2
+383940;PRO-2
+160095;PRO-2
+333880;PRO-2
+432;PRO-2
+384066;PRO-2
+385559;PRO-2
+5606;A
+341;A
+4278;A
+36316;A
+6840;A
+163993;A
+89164;A
+91638;A
+77002;A
+178533;A
+111032;A
+309286;A
+409955;A
+355039;A
+33296;B
+61237;B
+107;B
+256776;B
+283;B
+395;B
+393950;B
+188985;B
+14639;B
+198159;B
+347100;B
+336064;B
+30349;B
+237989;B
+1722;C
+266231;C
+41925;C
+50629;C
+200672;C
+147699;C
+52;C
+13554;C
+82322;C
+257289;C
+410176;C
+32811;C
+271173;C
+255284;C
+45477;D
+152271;D
+264579;D
+31374;D
+42189;D
+186683;D
+5436;D
+92483;D
+357665;D
+19;D
+362506;D
+315029;D
+251088;D
+297527;D
