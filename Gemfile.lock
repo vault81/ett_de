@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/hanami/model.git
-  revision: cdcfb79ebfd9d2fdfd7115fc2e824d2299fcc01b
+  revision: 2831f8d9647f5cce33200d3e345f006d97559f26
   specs:
     hanami-model (1.3.2)
       bigdecimal (~> 1.4)
