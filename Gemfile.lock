@@ -17,7 +17,7 @@ GEM
   specs:
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    appsignal (3.0.3)
+    appsignal (3.0.5)
       rack
     ast (2.4.2)
     backport (1.1.2)
