@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/hanami/model.git
-  revision: cdcfb79ebfd9d2fdfd7115fc2e824d2299fcc01b
+  revision: 6f097a2c18dd473eedb39bf7de6578436afdaa14
   specs:
-    hanami-model (1.3.2)
+    hanami-model (1.3.3)
       bigdecimal (~> 1.4)
       concurrent-ruby (~> 1.0)
       dry-logic (~> 0.4.2, < 0.5)
