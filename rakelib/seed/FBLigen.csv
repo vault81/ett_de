@@ -1,85 +1,79 @@
-ID;Einteilung
-315909;PRO-1
-11002;PRO-1
-102686;PRO-1
-21505;PRO-1
-40032;PRO-1
-4410;PRO-1
-129470;PRO-1
-48705;PRO-1
-51978;PRO-1
-93111;PRO-1
-758;PRO-1
-185894;PRO-1
-149868;PRO-1
-257146;PRO-1
-178509;PRO-2
-42233;PRO-2
-124792;PRO-2
-86511;PRO-2
-96720;PRO-2
-122515;PRO-2
-61793;PRO-2
-17997;PRO-2
-383940;PRO-2
-160095;PRO-2
-333880;PRO-2
-432;PRO-2
-384066;PRO-2
-385559;PRO-2
-5606;A
-341;A
-4278;A
-36316;A
-6840;A
-163993;A
-89164;A
-91638;A
-77002;A
-178533;A
-111032;A
-309286;A
-409955;A
-355039;A
-33296;B
-61237;B
-107;B
-256776;B
-283;B
-395;B
-393950;B
-188985;B
-14639;B
-198159;B
-347100;B
-336064;B
-30349;B
-237989;B
-1722;C
-266231;C
-41925;C
-50629;C
-200672;C
-147699;C
-52;C
-13554;C
-82322;C
-257289;C
-410176;C
-32811;C
-271173;C
-255284;C
-45477;D
-152271;D
-264579;D
-31374;D
-42189;D
-186683;D
-5436;D
-92483;D
-357665;D
-19;D
-362506;D
-315029;D
-251088;D
-297527;D
+ID;Einteilung;FB Name
+315909;PRO-1;Maik Reusner
+4410;PRO-1;Karsten Paul
+192277;PRO-1;Florian Kemper
+160095;PRO-1;Thomas Bone
+257146;PRO-1;Am El
+122515;PRO-1;Patrick Rott
+93111;PRO-1;Daniel Koch
+40032;PRO-1;Christian Wa
+384066;PRO-1;Andreas Henke
+149868;PRO-1;Karsten Kittel
+758;PRO-1;Peter Ger
+102686;PRO-1;Stefan Biretto
+178509;PRO-1;Lüder Hoppe
+355039;PRO-2;
+351172;PRO-2;Patrick Stefan Doll #
+61793;PRO-2;Spike Spieler
+262;PRO-2;Tony Dang
+5606;PRO-2;Caspar Koestler
+333880;PRO-2;Leon Bernhardt
+406599;PRO-2;Rene Breidbach
+413686;PRO-2;Vaia Hoffstadt #
+461063;PRO-2;Philip Schuetzl
+509295;PRO-2;Fabian Tanne
+96720;PRO-2;Thomas Reiger
+309286;PRO-2;Alfred Ebner
+515040;PRO-2;Vincent Rengers
+393950;A;Jonas Lassen
+44678;A;Michel Schütz
+91638;A;Gál Rita
+111032;A;Johannes Millan
+4278;A;Homer Hompson
+61237;A;Peter Lustig
+163993;A;Michael Widder
+89164;A;Oliver Nölle
+188985;A;Timon Ster
+30349;A;Kristian Hoffmann
+395;A;Dietrich Jahn
+6840;A;Detlev Stemberg
+33296;A;Sung Globetrotter
+39793;A;Jochen Ehlert
+347100;B;Max Seeger
+52;B;Torben Glissmann
+147699;B;Dennis Bepunkt
+395488;B;Thorsten Pietschmann
+36316;B;Marc Meier
+255284;B;Sebastian Klob
+1722;B;Tobi Mai
+32811;B;Carsten Pesch
+271173;B;Martin Needell
+266231;B;Michael Peña
+107;B;Ralf Cebulski
+50629;B;Luca Koralewski
+257289;B;Lars Kaplanski
+41925;B;Bjoern Heussner
+526381;C;Philipp Brunzel
+297675;C;Sven Kütemann
+264579;C;Michael Beckelmann
+599273;C;Marc Hogh
+78556;C;Rene Siekmann
+357665;C;Sebastian Perschewski
+428562;C;Richard Raubik
+521419;C;Frank Schaefer
+314724;C;Hans Werner #
+154005;C;Daniel Gaiser
+19;C;Reiner Schmid
+31374;C;Akilnathan X. Logeswaran
+152271;C;Martin Aloisson
+200672;D;Tristan Druyen
+13554;D;Michael Klemme
+315029;D;Stefan Fuchs
+5436;D;Jan Droste
+497759;D;Carsten Huppert
+251088;D;Fabi Bellaire
+502796;D;André Marten
+186683;D;Peter Löber
+486001;D;Richard Wiechmann
+503379;D;Dani Ma
+466142;D;Leon Kaczmarek #
