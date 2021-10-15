@@ -223,7 +223,7 @@ module Web
       #
       security.content_security_policy "
         form-action 'self';
-        frame-ancestors 'self';
+        frame-ancestors 'self' vlt81.de wp.vlt81.de wp.vault81.de wordpress.vault81.de eleven-germany.de;
         base-uri 'self';
         default-src 'none';
         script-src 'self' 'unsafe-inline' vlt81.de ett.vlt81.de;
@@ -234,7 +234,7 @@ module Web
         object-src 'none';
         plugin-types application/pdf;
         child-src 'self';
-        frame-src 'self';
+        frame-src 'self' vlt81.de wp.vlt81.de wp.vault81.de wordpress.vault81.de eleven-germany.de;
         media-src 'self'
       "
 
