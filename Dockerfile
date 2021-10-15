@@ -19,7 +19,8 @@ COPY Gemfile /code
 COPY Gemfile.lock /code
 RUN chown -R app:app /code/
 
-RUN apt-get install -y --no-install-recommends libsqlite3-dev build-essential libpq-dev postgresql-client \
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends libsqlite3-dev build-essential libpq-dev postgresql-client \
   && bundle install \
   && apt-get purge -y build-essential \
   && apt-get -y autoremove
